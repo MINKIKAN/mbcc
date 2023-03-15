@@ -9,7 +9,7 @@ public class Member {
 	private String gender;
 	private String memName;
 	private String birthday;
-	private Date emDate;
+	private Date empDate;
 	private String email;
 	private String tel;
 	private int empTeam;
@@ -66,12 +66,12 @@ public class Member {
 		this.birthday = birthday;
 	}
 
-	public Date getEmDate() {
-		return emDate;
+	public Date getEmpDate() {
+		return empDate;
 	}
 
 	public void setEmDate(Date emDate) {
-		this.emDate = emDate;
+		this.empDate = emDate;
 	}
 
 	public String getEmail() {
