@@ -17,14 +17,6 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-car-side"></i></div>
                             Task
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('mail.html')">
-                            <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-clipboard"></i></div>
-                            Mail
-                        </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('calendar.html')">
-                            <div class="sb-nav-link-icon"><i class="fa-regular fa-comet"></i></div>
-                            Calendar
-                        </a>
                         <a class="nav-link" href="#" onclick="asyncMovePage('drive.html')">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-people"></i></div>
                             Drive
@@ -41,18 +33,11 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Approval
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('attendance.do')">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Attendance
+                        <a class="nav-link" href="#" onclick="asyncMovePage('calendar.html')">
+                            <div class="sb-nav-link-icon"><i class="fa-regular fa-comet"></i></div>
+                            Calendar
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('evaluation.do')">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Evaluation
-                        </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('meeting.do')">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            meeting
-                        </a>
+                        
                         
                         </div>
                     </div>
