@@ -5,6 +5,70 @@
   
 <mapper namespace="mapper.member">
   
+  <resultMap id="member" type="com.mbcc.vo.Member">
+  <id property="memNum" column="memNum"/>
+  <result property="memId" column="memId"/>
+  <result property="memPwd" column="memPwd"/>
+  <result property="gender" column="gender"/>
+  <result property="memName" column="memName"/>
+  <result property="emDate" column="emDate"/>
+  <result property="email" column="email"/>
+  <result property="tel" column="tel"/>
+  <result property="empTeam" column="empTeam"/>
+  <result property="emType" column="emType"/>
+  <result property="vacation" column="vacation"/>
+   <result property="memImg" column="memImg"/>
+    <result property="salary" column="salary"/>
+</resultMap>
 
+<select id="selectAllUsers" resultMap="member">
+  SELECT * FROM Member
+</select>
     
+     <select id="userLogin" parameterType="member" resultType="String">
+        select memId from member where memId=#{memId} and memPwd=#{memPwd}       
+    </select>
+    
+     <select id="validId" resultType="String" parameterType="String">
+        select memId from user where memId=#{memId}        
+    </select>
+    
+    <select id="getOneUser" parameterType="String" resultMap="member">
+    	 SELECT * FROM member where memId=#{memId} 
+    	</select>
+    	
+    	 <insert id="userInsert" parameterType="member">
+        INSERT INTO user (memId, memPwd, gender, memName, emDate, email, tel, empTeam, emType, vacation, memImg, salary)
+       VALUES(
+        #{memId},
+        #{memPwd},
+        #{gender},
+        #{memName},
+        #{emDate},
+        #{email},
+        #{tel},
+        #{emTeam},
+        #{emType},
+        #{vacation},
+        #{memImg},
+        #{salary}
+        )       
+    </insert>
+    
+    <update id="userUpdate" parameterType="member">
+         update user
+         set email=#{email}, tel=#{tel}, memImg=#{memImg}
+         where memId=#{memId} 	 
+    </update>
+    
+    <update id="adminUserUpdate" parameterType="String">
+         update user
+         set memPwd=#{memPwd}, gender=#{gender}, memName=#{memName}, email=#{email}, tel=#{tel}, emTeam=#{emTeam}, emType=#{emType}, vacation=#{vacation}, memImg=#{memImg}, salary=#{salary}
+         where memId=#{memId} 	 
+    </update>
+    
+    <delete id="userDelete" parameterType="String">  
+        delete from user where memId=#{memId} 
+    </delete>
+
 </mapper>
