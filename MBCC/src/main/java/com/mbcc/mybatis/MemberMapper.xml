@@ -5,52 +5,54 @@
   
 <mapper namespace="mapper.member">
   
-  <resultMap id="member" type="com.mbcc.vo.Member">
-  <id property="memNum" column="memNum"/>
-  <result property="memId" column="memId"/>
-  <result property="memPwd" column="memPwd"/>
-  <result property="gender" column="gender"/>
-  <result property="memName" column="memName"/>
-  <result property="emDate" column="emDate"/>
-  <result property="email" column="email"/>
-  <result property="tel" column="tel"/>
-  <result property="empTeam" column="empTeam"/>
-  <result property="emType" column="emType"/>
-  <result property="vacation" column="vacation"/>
-   <result property="memImg" column="memImg"/>
-    <result property="salary" column="salary"/>
-</resultMap>
+	<resultMap id="member" type="com.mbcc.vo.Member">
+		<id property="memNum" column="memNum"/>
+		<result property="memId" column="memId"/>
+		<result property="memPwd" column="memPwd"/>
+		<result property="memName" column="memName"/>
+		<result property="memImg" column="memImg"/>
+		<result property="gender" column="gender"/>
+		<result property="birthday" column="birthday"/>		
+		<result property="empDate" column="empDate"/>
+		<result property="email" column="email"/>
+		<result property="tel" column="tel"/>
+		<result property="empTeam" column="empTeam"/>
+		<result property="empType" column="empType"/>
+		<result property="vacation" column="vacation"/>
+		<result property="salary" column="salary"/>
+	</resultMap>
 
-<select id="selectAllUsers" resultMap="member">
-  SELECT * FROM Member
-</select>
+	<select id="selectAllUsers" resultMap="member">
+	  SELECT * FROM Member
+	</select>
     
-     <select id="userLogin" parameterType="member" resultType="String">
+    <select id="userLogin" parameterType="member" resultType="String">
         select memId from member where memId=#{memId} and memPwd=#{memPwd}       
     </select>
     
-     <select id="validId" resultType="String" parameterType="String">
+    <select id="validId" resultType="String" parameterType="String">
         select memId from user where memId=#{memId}        
     </select>
     
     <select id="getOneUser" parameterType="String" resultMap="member">
     	 SELECT * FROM member where memId=#{memId} 
-    	</select>
+    </select>
     	
-    	 <insert id="userInsert" parameterType="member">
-        INSERT INTO user (memId, memPwd, gender, memName, emDate, email, tel, empTeam, emType, vacation, memImg, salary)
-       VALUES(
+    <insert id="userInsert" parameterType="member">
+        INSERT INTO user (memId, memPwd, memName, memImg, gender, birthday, empDate, email, tel, empTeam, empType, vacation, salary)
+        VALUES(
         #{memId},
         #{memPwd},
-        #{gender},
         #{memName},
-        #{emDate},
+        #{memImg},
+        #{gender},
+        #{birthday},
+        #{empDate},
         #{email},
         #{tel},
-        #{emTeam},
-        #{emType},
+        #{empTeam},
+        #{empType},
         #{vacation},
-        #{memImg},
         #{salary}
         )       
     </insert>
@@ -63,7 +65,7 @@
     
     <update id="adminUserUpdate" parameterType="String">
          update user
-         set memPwd=#{memPwd}, gender=#{gender}, memName=#{memName}, email=#{email}, tel=#{tel}, emTeam=#{emTeam}, emType=#{emType}, vacation=#{vacation}, memImg=#{memImg}, salary=#{salary}
+         set memPwd=#{memPwd}, gender=#{gender}, memName=#{memName}, email=#{email}, tel=#{tel}, empTeam=#{emTeam}, empType=#{emType}, vacation=#{vacation}, memImg=#{memImg}, salary=#{salary}
          where memId=#{memId} 	 
     </update>
     
