@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.boardTask">
+
+	<resultMap id="boardTask" type="com.mbcc.vo.BoardTask">
+        <!-- BoardCommon fields -->
+        <id property="boardId" column="board_id" />
+        <result property="boardType" column="board_type" />
+        <result property="boardTitle" column="board_title" />
+        <result property="boardContent" column="board_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <result property="memNum" column="mem_num" />
+        <result property="fileId" column="file_id" />
+        
+        <!-- BoardTask fields -->
+        <result property="responsibleMemNum" column="responsible_mem_num" />
+        <result property="teamNum" column="team_num" />
+        <result property="progress" column="progress" />
+    </resultMap>
+  
+    <select id="getAllTask" resultMap="boardTask">
+        SELECT bc.*, bt.responsible_mem_num, bt.team_num, bt.progress
+        FROM board_common bc
+        JOIN board_task bt ON bc.board_id = bt.board_id
+    </select>
+    
+</mapper>

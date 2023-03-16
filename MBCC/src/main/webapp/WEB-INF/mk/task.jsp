@@ -5,7 +5,7 @@
     
 	<div class="task-grid">
 		<div class="task-main-side">
-			<button type="button" class="btn btn-primary" id="task-addBtn">새 업무</button>
+			<button id="task-addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">새 업무</button>
 			<br>
 			<hr>
 			<div class="task-main-side-header">
@@ -26,18 +26,127 @@
 		<div class="task-main-top"><h2 id="task-title">담당업무</h2></div>
 		<div class="task-main-center-left">
 		<c:forEach var="vo" items="${tlist}" varStatus="vs">
-	    <div>
-	    	  <h6>${vo.content}</h6>
+	    <div class="task-main-center-left-tlist-section">
+	    	  <h6 class="task-main-center-left-tlist-section-component">${vo.boardTitle}</h6>
+	    	  <h6 class="task-main-center-left-tlist-section-component">${vo.progress}</h6>
     	</div>   	 
 	  	</c:forEach>
 		</div>
 		<div class="task-main-center-right"></div>
 	</div>
 	
+      <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-lg" role="document">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h5 class="modal-title" id="taskModalLabel">새 업무 작성</h5>
+	        </div>
+	        <div class="modal-body">
+	          <!-- 업무 작성 양식 -->
+	          <form id="taskForm">
+	            <div class="form-group mb-3">
+	              <label for="taskTitle" class="form-label">제목</label>
+	              <input type="text" class="form-control" id="taskTitle" placeholder="제목을 입력하세요">
+	            </div>
+	            <div class="form-group mb-3">
+	              <label for="responsibleMemNum" class="form-label">담당자 회원 번호</label>
+	              <input type="number" class="form-control" id="responsibleMemNum" placeholder="담당자 회원 번호를 입력하세요">
+	            </div>
+	            <div class="form-group mb-3">
+	              <label for="teamNum" class="form-label">부서 번호</label>
+	              <input type="number" class="form-control" id="teamNum" placeholder="부서 번호를 입력하세요">
+	            </div>
+	            <div class="form-group mb-3">
+	              <label for="progress" class="form-label">진행 상황</label>
+	              <select class="form-control" id="progress">
+	                <option>할 일</option>
+	                <option>진행 중</option>
+	                <option>완료</option>
+	              </select>
+	            </div>
+	            <div class="form-group mb-3">
+	              <label for="taskContent" class="form-label">내용</label>
+	              <textarea class="form-control" id="taskContent" rows="3"></textarea>
+	            </div>
+		          
+		          <!-- <div class="form-group">
+		            <label for="taskType">게시판 종류</label>
+		            <select class="form-control" id="taskType">
+		              <option>BUSINESS</option>
+		              <option>FREE</option>
+		              <option>APPROVAL</option>
+		            </select>
+		          </div> -->
+		          
+		          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button> -->
+		          
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-primary" onclick="submitTaskForm()">저장</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+			
 <script>
 	function sideHeaderContentClick(){
 		alert("HI!");
 	}
+	
+	$(document).ready(function() {
+	    $('#task-addBtn').on('click', function() {
+	        $('#taskModal').modal('show');
+	    });
+	});
+	
+	function submitTaskForm() {
+	    // 양식 데이터 가져오기
+	    const taskTitle = $('#taskTitle').val();
+	    const taskContent = $('#taskContent').val();
+	    const taskType = $('#taskType').val();
+	    const responsibleMemNum = $('#responsibleMemNum').val();
+	    const teamNum = $('#teamNum').val();
+	    const progress = $('#progress').val();
+
+	    // 양식 데이터 확인
+	    console.log('Title:', taskTitle);
+	    console.log('Content:', taskContent);
+	    console.log('Type:', taskType);
+	    console.log('Responsible Member Number:', responsibleMemNum);
+	    console.log('Team Number:', teamNum);
+	    console.log('Progress:', progress);
+
+	    // 서버로 데이터 전송 (예시)
+	    /*
+	    $.ajax({
+	        type: 'POST',
+	        url: 'submitTask', // 실제 전송하려는 서버 URL
+	        data: {
+	            title: taskTitle,
+	            content: taskContent,
+	            type: taskType,
+	            responsibleMemNum: responsibleMemNum,
+	            teamNum: teamNum,
+	            progress: progress
+	        },
+	        success: function(response) {
+	            // 서버로부터의 응답을 처리
+	            console.log(response);
+	            // 모달 닫기
+	            $('#taskModal').modal('hide');
+	        },
+	        error: function(xhr, status, error) {
+	            // 에러 처리
+	            console.error('Error:', error);
+	        }
+	    });
+	    */
+	}
+	
 </script>
 	
 <style>
@@ -91,8 +200,44 @@
 	border: 0.5px solid black;
     grid-area: left;
 }
+
+.task-main-center-left-tlist-section {
+	height:100px;
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+}
+
+.task-main-center-left-tlist-section:hover {
+	background-color:#E6E6E6;
+}
+
 .task-main-center-right {
 	border: 0.5px solid black;
     grid-area: right;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+.form-label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #495057;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+.btn {
+  font-size: 14px;
 }
 </style>

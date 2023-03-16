@@ -9,7 +9,7 @@
   
   <typeAliases>
       <typeAlias type="com.mbcc.vo.Member" alias="member"/>
-      <typeAlias type="com.mbcc.vo.Task" alias="task"/>
+      <typeAlias type="com.mbcc.vo.BoardTask" alias="boardTask"/>
   </typeAliases> 
   
   <environments default="development">
@@ -25,7 +25,7 @@
   </environments>
   
   <mappers>
-  		<mapper resource="com/mbcc/mybatis/TaskMapper.xml"/>
+  		<mapper resource="com/mbcc/mybatis/BoardTaskMapper.xml"/>
   		<mapper resource="com/mbcc/mybatis/MemberMapper.xml"/>
   </mappers>
 </configuration>

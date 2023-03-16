@@ -3,20 +3,45 @@ package com.mbcc.vo;
 import java.util.Date;
 
 public class Member {
+	
 	private int memNum;
-	private String memId;
-	private String memPwd;
-	private String memName;
-	private String memImg;
-	private String gender;
-	private String birthday;
-	private Date empDate;
-	private String email;
-	private String tel;
-	private int empTeam;
-	private int empType;
-	private int vacation;
-	private int salary;
+    private String memId;
+    private String memPwd;
+    private String memName;
+    private String memImg;
+    private String gender;
+    private String birthday;
+    private Date empDate;
+    private String email;
+    private String tel;
+    private int teamNum;
+    private int empType;
+    private int vacation;
+    private int salary;
+    private String role;
+    
+    Member(){}
+    
+	public Member(int memNum, String memId, String memPwd, String memName, String memImg, String gender,
+			String birthday, Date empDate, String email, String tel, int teamNum, int empType, int vacation, int salary,
+			String role) {
+		super();
+		this.memNum = memNum;
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.memImg = memImg;
+		this.gender = gender;
+		this.birthday = birthday;
+		this.empDate = empDate;
+		this.email = email;
+		this.tel = tel;
+		this.teamNum = teamNum;
+		this.empType = empType;
+		this.vacation = vacation;
+		this.salary = salary;
+		this.role = role;
+	}
 
 	public int getMemNum() {
 		return memNum;
@@ -80,7 +105,6 @@ public class Member {
 
 	public void setEmpDate(Date empDate) {
 		this.empDate = empDate;
-
 	}
 
 	public String getEmail() {
@@ -99,12 +123,12 @@ public class Member {
 		this.tel = tel;
 	}
 
-	public int getEmpTeam() {
-		return empTeam;
+	public int getTeamNum() {
+		return teamNum;
 	}
 
-	public void setEmpTeam(int empTeam) {
-		this.empTeam = empTeam;
+	public void setTeamNum(int teamNum) {
+		this.teamNum = teamNum;
 	}
 
 	public int getEmpType() {
@@ -129,6 +153,14 @@ public class Member {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
