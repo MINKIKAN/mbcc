@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/login.do")
+@WebServlet("/main.do")
 public class escortServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		RequestDispatcher dis=req.getRequestDispatcher("WEB-INF/mk/login.jsp");
+		RequestDispatcher dis=req.getRequestDispatcher("WEB-INF/view/main.jsp");
 		dis.forward(req, res);
 	}
 
