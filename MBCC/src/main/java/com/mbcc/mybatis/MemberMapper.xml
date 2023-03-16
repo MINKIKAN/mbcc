@@ -22,9 +22,11 @@
 		<result property="salary" column="salary"/>
 	</resultMap>
 
-	<select id="selectAllUsers" resultMap="member">
-	  SELECT * FROM Member
-	</select>
+
+
+<select id="selectAllUsers" resultMap="member">
+  SELECT * FROM Member
+</select>
     
     <select id="userLogin" parameterType="member" resultType="String">
         select memId from member where memId=#{memId} and memPwd=#{memPwd}       
