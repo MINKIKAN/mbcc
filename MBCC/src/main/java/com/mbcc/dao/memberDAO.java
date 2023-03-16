@@ -13,6 +13,7 @@ public class memberDAO {
 	}
    
    public String userLogin(Member member) {
+	   System.out.println("test");
 	   SqlSession session= MybatisConfig.getInstance().openSession(true);
 	   String memId=session.selectOne("mapper.member.userLogin", member);
 	   session.close();

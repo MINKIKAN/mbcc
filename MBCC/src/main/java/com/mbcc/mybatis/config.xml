@@ -9,7 +9,11 @@
   
   <typeAliases>
       <typeAlias type="com.mbcc.vo.Member" alias="member"/>
+<<<<<<< Updated upstream
       <typeAlias type="com.mbcc.vo.BoardTask" alias="boardTask"/>
+=======
+     <!--  <typeAlias type="com.mbcc.vo.Task" alias="task"/> -->
+>>>>>>> Stashed changes
   </typeAliases> 
   
   <environments default="development">
@@ -25,7 +29,11 @@
   </environments>
   
   <mappers>
+<<<<<<< Updated upstream
   		<mapper resource="com/mbcc/mybatis/BoardTaskMapper.xml"/>
+=======
+  		<!-- <mapper resource="com/mbcc/mybatis/TaskMapper.xml"/> -->
+>>>>>>> Stashed changes
   		<mapper resource="com/mbcc/mybatis/MemberMapper.xml"/>
   </mappers>
 </configuration>

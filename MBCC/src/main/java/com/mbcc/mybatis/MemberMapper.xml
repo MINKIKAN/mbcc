@@ -20,6 +20,7 @@
 		<result property="empType" column="empType"/>
 		<result property="vacation" column="vacation"/>
 		<result property="salary" column="salary"/>
+		<result property="role" column="role"/>
 	</resultMap>
 
 
@@ -56,6 +57,7 @@
         #{empType},
         #{vacation},
         #{salary}
+        #{role}
         )       
     </insert>
     

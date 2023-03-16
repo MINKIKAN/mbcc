@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class MybatisConfig {
 
 	   private static SqlSessionFactory sqlSessionFactory;
-	   
+
 	   static {
 		   try {
 			   String resource="com/mbcc/mybatis/config.xml";
