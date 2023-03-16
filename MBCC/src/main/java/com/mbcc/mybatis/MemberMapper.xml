@@ -21,6 +21,7 @@
     <result property="salary" column="salary"/>
 </resultMap>
 
+
 <select id="selectAllUsers" resultMap="member">
   SELECT * FROM Member
 </select>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="kr">
   <head>
-
+<script type="text/javascript" src="script/login.js" defer></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,12 +28,12 @@
         <div id="loginBoxTitle">MBCC PROJECT</div>
         <!-- 아이디, 비번, 버튼 박스 -->
         <div id="inputBox">
-          <div class="input-form-box"><span>아이디 </span><input type="text" name="uid" class="form-control"></div>
-          <div class="input-form-box"><span>비밀번호 </span><input type="password" name="upw" class="form-control"></div>
+          <div class="input-form-box"><span>아이디 </span><input type="text" name="memId" class="form-control"></div>
+          <div class="input-form-box"><span>비밀번호 </span><input type="password" name="memPwd" class="form-control"></div>
           <div class="button-login-box" >
-            <button type="button" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
-            <a href="#"  style="width:50%">회원가입</a>
-            <a href="#"  style="width:50%">비밀번호 찾기</a>
+            <button id="login" type="button" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
+            <a id="insertmember" href="#"  style="width:50%" >회원가입</a>
+            <a id="findPw" href="#"  style="width:50%">비밀번호 찾기</a>
           </div>
         </div>
         
