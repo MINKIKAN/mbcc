@@ -26,9 +26,21 @@
 		<div class="task-main-top"><h2 id="task-title">담당업무</h2></div>
 		<div class="task-main-center-left">
 		<c:forEach var="vo" items="${tlist}" varStatus="vs">
-	    <div class="task-main-center-left-tlist-section">
+	    <div class="task-main-center-left-tlist-section" data-board-title="${vo.boardTitle}" onclick="showTlistContents(this)">
 	    	  <h6 class="task-main-center-left-tlist-section-component">${vo.boardTitle}</h6>
-	    	  <h6 class="task-main-center-left-tlist-section-component">${vo.progress}</h6>
+	    	  <h6 class="task-main-center-left-tlist-section-component
+				    <c:choose>
+				        <c:when test="${vo.progress == 'TO_DO'}">task-status-to-do</c:when>
+				        <c:when test="${vo.progress == 'IN_PROGRESS'}">task-status-in-progress</c:when>
+				        <c:when test="${vo.progress == 'DONE'}">task-status-done</c:when>
+				    </c:choose>
+			  ">
+				<c:choose>
+			        <c:when test="${vo.progress == 'TO_DO'}">할 일&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+			        <c:when test="${vo.progress == 'IN_PROGRESS'}">진행 중&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+			        <c:when test="${vo.progress == 'DONE'}">완료&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+			    </c:choose>
+			  </h6>
     	</div>   	 
 	  	</c:forEach>
 		</div>
@@ -59,9 +71,9 @@
 	            <div class="form-group mb-3">
 	              <label for="progress" class="form-label">진행 상황</label>
 	              <select class="form-control" id="progress">
-	                <option>할 일</option>
-	                <option>진행 중</option>
-	                <option>완료</option>
+	                <option>할 일&nbsp;&nbsp;<span class="badge bg-secondary">&nbsp;</span></option>
+	                <option>진행 중&nbsp;&nbsp;<span class="badge bg-secondary">&nbsp;</span></option>
+	                <option>완료&nbsp;&nbsp;<span class="badge bg-secondary">&nbsp;</span></option>
 	              </select>
 	            </div>
 	            <div class="form-group mb-3">
@@ -85,7 +97,6 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 		        <button type="button" class="btn btn-primary" onclick="submitTaskForm()">저장</button>
 		      </div>
 		    </div>
@@ -147,100 +158,39 @@
 	    */
 	}
 	
-</script>
+	function showTlistContents(element) {
+	    const clickedBoardTitle = element.getAttribute('data-board-title');
+	    let selectedTask;
+
+	    const tlist = Array.from(document.querySelectorAll('.task-main-center-left-tlist-section')).map(taskElement => {
+	        return {
+	            boardTitle: taskElement.getAttribute('data-board-title')
+	            // 다른 속성들도 여기에 추가하세요
+	        };
+	    });
+
+	    for (const task of tlist) {
+	        if (task.boardTitle === clickedBoardTitle) {
+	        	alert("true");
+	            selectedTask = task;
+	            break;
+	        }
+	    }
+	    alert(${selectedTask.boardTitle});
+
+	    if (selectedTask) {
+	        let html = '';
+	        html += `<div class="task-content">`;
+	        html += `<h4>${selectedTask.boardTitle}</h4>`;
+	        // 다른 필요한 데이터도 여기에 추가하세요
+	        html += `</div>`;
+	        
+
+	        document.querySelector(".task-main-center-right").innerHTML = html;
+	    }
+	}
 	
-<!-- <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-#task-addBtn {
-	margin-left:10px;
-	margin-top:24px;
-	margin-bottom:9px;
-}
-#task-title {
-	margin-left:10px;
-}
-
-.task-grid {
-	border: 1px solid black;
-    display: grid;
-    height: 100vh;
-    grid-template: 
-    "side top top top top top" 0.5fr
-    "side left left right right right" 4fr
-    "side left left right right right" 1fr
-    ;
-}
-.task-main-side {
-	background-color:#E6E6E6;
-	border: 0.5px solid black;
-    grid-area: side;
-}
-.task-main-side-header-content{
-	font-size:20px;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-}
-.task-main-side-header-content:hover{
-	background-color:lightgrey;
-}
-.task-main-top {
-	display:flex;
-	justify-content:left;
-	align-items:center;
-	border: 0.5px solid black;
-    grid-area: top;
-}
-.task-main-center-left {
-	border: 0.5px solid black;
-    grid-area: left;
-}
-
-.task-main-center-left-tlist-section {
-	height:100px;
-	display:flex;
-	justify-content:space-around;
-	align-items:center;
-}
-
-.task-main-center-left-tlist-section:hover {
-	background-color:#E6E6E6;
-}
-
-.task-main-center-right {
-	border: 0.5px solid black;
-    grid-area: right;
-}
-
-.modal-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.modal-footer {
-  background-color: #f8f9fa;
-  border-top: 1px solid #dee2e6;
-}
-
-.form-label {
-  font-weight: bold;
-  font-size: 14px;
-  color: #495057;
-}
-
-.form-control {
-  font-size: 14px;
-}
-
-.btn {
-  font-size: 14px;
-}
-</style> -->
+</script>
 
 <style>
 
@@ -270,8 +220,8 @@ body {
     height: 100vh;
     grid-template:
     "side top top top top top" 0.5fr
-    "side left left right right right" 4fr
-    "side left left right right right" 1fr
+    "side left right right right right" 4fr
+    "side left right right right right" 1fr
     ;
 }
 
@@ -312,12 +262,24 @@ body {
     overflow-y: scroll;
 }
 
+.task-main-center-left::-webkit-scrollbar {
+    width: 0px; /* 스크롤바 너비를 설정합니다. */
+}
+
+.task-main-center-left::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* 스크롤바 배경색을 반투명하게 설정합니다. */
+}
+
+.task-main-center-left::-webkit-scrollbar-track {
+    background: transparent; /* 스크롤바 트랙을 투명하게 만듭니다. */
+}
+
 .task-main-center-left-tlist-section {
     height: 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0 10px;
     border-bottom: 1px solid #dee2e6;
     cursor: pointer;
 }
@@ -353,5 +315,20 @@ body {
 
 .btn {
     font-size: 14px;
+}
+
+.task-status-to-do {
+    color: limegreen;
+    font-size:11px;
+}
+
+.task-status-in-progress {
+    color: blue;
+    font-size:12px;
+}
+
+.task-status-done {
+    color: #E0E0E0;
+    font-size:12px;
 }
 </style>
