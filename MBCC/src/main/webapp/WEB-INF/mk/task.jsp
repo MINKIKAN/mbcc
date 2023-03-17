@@ -149,7 +149,7 @@
 	
 </script>
 	
-<style>
+<!-- <style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -239,5 +239,119 @@
 
 .btn {
   font-size: 14px;
+}
+</style> -->
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+}
+
+#task-addBtn {
+    margin-left: 10px;
+    margin-top: 24px;
+    margin-bottom: 9px;
+}
+
+#task-title {
+    margin-left: 10px;
+}
+
+.task-grid {
+    display: grid;
+    height: 100vh;
+    grid-template:
+    "side top top top top top" 0.5fr
+    "side left left right right right" 4fr
+    "side left left right right right" 1fr
+    ;
+}
+
+.task-main-side {
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    grid-area: side;
+    padding: 10px;
+}
+
+.task-main-side-header-content {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.task-main-side-header-content:hover {
+    background-color: #f4f6f9;
+}
+
+.task-main-top {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    grid-area: top;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.task-main-center-left {
+    border-right: 1px solid #dee2e6;
+    grid-area: left;
+    background-color: #ffffff;
+    overflow-y: scroll;
+}
+
+.task-main-center-left-tlist-section {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+    cursor: pointer;
+}
+
+.task-main-center-left-tlist-section:hover {
+    background-color: #f4f6f9;
+}
+
+.task-main-center-right {
+    grid-area: right;
+    background-color: #ffffff;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.form-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #495057;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+.btn {
+    font-size: 14px;
 }
 </style>
