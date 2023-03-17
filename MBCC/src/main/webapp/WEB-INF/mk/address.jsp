@@ -6,81 +6,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Address List</title>
-	<script>
-//address.js
-
-function showAddressList(list) {
-  // 주소록 목록을 보여주는 함수
-  // list: 주소록 데이터 배열
-  
-  // 주소록 테이블의 tbody 엘리먼트를 찾아온다
-  var tbody = document.querySelector('#addressTable tbody');
-  
-  // tbody 내용을 초기화
-  tbody.innerHTML = '';
-  
-  // 주소록 데이터를 반복하여 tr 엘리먼트를 생성하여 tbody에 추가
-  list.forEach(function (member) {
-    var tr = document.createElement('tr');
-    
-    var tdNum = document.createElement('td');
-    tdNum.textContent = member.memNum;
-    tr.appendChild(tdNum);
-    
-    var tdName = document.createElement('td');
-    tdName.textContent = member.memName;
-    tr.appendChild(tdName);
-    
-    var tdEmail = document.createElement('td');
-    tdEmail.textContent = member.email;
-    tr.appendChild(tdEmail);
-    
-    tbody.appendChild(tr);
-  });
-}
-
-// 주소록 데이터를 가져오는 함수 호출
-var xhr = new XHttpRequest();
-xhr.open('GET', '/addressList');
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === xhr.DONE) {
-    if (xhr.status === 200) {
-      // 주소록 데이터 가져오기 성공
-      var addressList = JSON.parse(xhr.responseText);
-      showAddressList(addressList);
-    } else {
-      // 주소록 데이터 가져오기 실패
-      alert('주소록 데이터를 가져오지 못했습니다.');
-    }
-  }
-};
-xhr.send();
-
-
-
-</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 	<h1>주소록</h1>
-	<table>
+	<table class=" py-10 table table-bordered">
 	
 			<tr>
-				<th>사원 번호</th>
-				<th>사원 아이디 </th>
-				<th>사원 이름</th>
-				<th>부서 이름</th>
-				<th>등급 </th>
-				<th>급여</th>
+				<td>사원 번호</td>
+				<td>사원 아이디 </td>
+				<td>사원 이름</td>
+				<td>성별</td>
+				<td>생년월일</td>
+				<td>입사일</td>
+				<td>이메일</td>
+				<td>전화번호</td>
+				<td>소속팀</td>
+				<td>직급 </td>
+				<td>급여</td>
 			</tr>
 		
-		<tbody>
+		
 			<c:forEach var="member" items="${list}">
 				<tr>
 					<td>${member.memNum}</td>
 					<td>${member.memId}</td>
 					<td>${member.memName}</td>
-					<td>${member.teamName}</td>
+					<td>${member.gender}</td>
+					<td>${member.birthday}</td>
+					<td>${member.empDate}</td>
+					<td>${member.email}</td>
+					<td>${member.tel}</td>
+					<td>${member.teamNum}</td>
 					<td>${member.empType}</td>
 					<td>${member.salary}</td>
 				</tr>
