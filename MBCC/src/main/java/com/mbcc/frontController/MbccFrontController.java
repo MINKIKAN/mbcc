@@ -14,9 +14,11 @@ public class MbccFrontController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+		System.out.println("프론트컨트롤 들어옴");
 		String url=req.getRequestURI();
 		System.out.println("url=" + url); 
 		String ctx=req.getContextPath();
+		System.out.println("frontcon ctx="+ctx);
 		String command=url.substring(ctx.length());
 		System.out.println("command=" + command); 
 		Controller controller=null;

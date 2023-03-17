@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,7 +26,10 @@
 		
         
         <script>
-	    	function asyncMovePage(url) {
+        
+	    	
+        
+        function asyncMovePage(url) {
 	    		var ajaxOption={
 	    				url : url,
 	    				async : true,
@@ -39,6 +43,11 @@
 	    			$('#bodyContents').html(data);
 	    		}); 
 	    	}
+	    	
+       
+        
+       
+	    
 	    </script>
         
     </head>
@@ -55,12 +64,13 @@
             </form>
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><c:if test="${id ne null}">
+					${id}님 </c:if><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a id="Mypage" class="dropdown-item" href="#!">My page</a></li>
+                        <li><a id="updateMeber" class="dropdown-item" href="#!">나의 정보수정</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a id="logout" class="dropdown-item"  onclick="location.href='${ctx}/logout.do'">Logout</a></li>
                     </ul>
                 </li>
             </ul>
