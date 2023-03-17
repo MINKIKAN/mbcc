@@ -6,7 +6,7 @@ public class BoardTask extends BoardCommon {
     private int teamNum;
     private String progress;
     
-    BoardTask(){}
+    public BoardTask(){}
     
 	public BoardTask(int responsibleMemNum, int teamNum, String progress) {
 		super();

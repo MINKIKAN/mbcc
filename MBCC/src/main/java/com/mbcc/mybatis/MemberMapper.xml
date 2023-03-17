@@ -6,43 +6,51 @@
 <mapper namespace="mapper.member">
   
 	<resultMap id="member" type="com.mbcc.vo.Member">
-		<id property="memNum" column="memNum"/>
-		<result property="memId" column="memId"/>
-		<result property="memPwd" column="memPwd"/>
-		<result property="memName" column="memName"/>
-		<result property="memImg" column="memImg"/>
+	
+	        <!-- member fields -->
+		<id property="memNum" column="mem_num"/>
+		<result property="memId" column="mem_id"/>
+		<result property="memPwd" column="mem_pwd"/>
+		<result property="memName" column="mem_name"/>
+		<result property="memImg" column="mem_img"/>
 		<result property="gender" column="gender"/>
 		<result property="birthday" column="birthday"/>		
-		<result property="empDate" column="empDate"/>
+		<result property="empDate" column="emp_date"/>
 		<result property="email" column="email"/>
 		<result property="tel" column="tel"/>
-		<result property="empTeam" column="empTeam"/>
-		<result property="empType" column="empType"/>
+		<result property="teamNum" column="team_num"/>
+		<result property="empType" column="emp_type"/>
 		<result property="vacation" column="vacation"/>
 		<result property="salary" column="salary"/>
 		<result property="role" column="role"/>
+		
+		<!-- team fields -->
+		<result property="teamNum" column="team_num" />
+        <result property="teamName" column="team_name" />
 	</resultMap>
 
 
 
 <select id="selectAllUsers" resultMap="member">
-  SELECT * FROM Member
+  SELECT mb.*, tm.team_num, tm.team_name 
+  FROM member mb
+  JOIN team tm ON mb.team_num = tm.team_num
 </select>
     
     <select id="userLogin" parameterType="member" resultType="String">
-        select memId from member where memId=#{memId} and memPwd=#{memPwd}       
+        select mem_id from member where mem_id=#{memId} and mem_pwd=#{memPwd}       
     </select>
     
     <select id="validId" resultType="String" parameterType="String">
-        select memId from user where memId=#{memId}        
+        select mem_id from user where mem_id=#{memId}        
     </select>
     
     <select id="getOneUser" parameterType="String" resultMap="member">
-    	 SELECT * FROM member where memId=#{memId} 
+    	 SELECT * FROM member where mem_id=#{memId} 
     </select>
     	
     <insert id="userInsert" parameterType="member">
-        INSERT INTO user (memId, memPwd, memName, memImg, gender, birthday, empDate, email, tel, empTeam, empType, vacation, salary)
+        INSERT INTO user (mem_id, mem_pwd, mem_name, mem_img, gender, birthday, emp_date, email, tel, team_num, emp_type, vacation, salary)
         VALUES(
         #{memId},
         #{memPwd},
@@ -53,7 +61,7 @@
         #{empDate},
         #{email},
         #{tel},
-        #{empTeam},
+        #{teamNum},
         #{empType},
         #{vacation},
         #{salary}
@@ -62,19 +70,19 @@
     </insert>
     
     <update id="userUpdate" parameterType="member">
-         update user
+         update member
          set email=#{email}, tel=#{tel}, memImg=#{memImg}
-         where memId=#{memId} 	 
+         where mem_id=#{mem_id} 	 
     </update>
     
     <update id="adminUserUpdate" parameterType="String">
-         update user
-         set memPwd=#{memPwd}, gender=#{gender}, memName=#{memName}, email=#{email}, tel=#{tel}, empTeam=#{emTeam}, empType=#{emType}, vacation=#{vacation}, memImg=#{memImg}, salary=#{salary}
-         where memId=#{memId} 	 
+         update member
+         set mem_pwd=#{mem_pwd}, gender=#{gender}, memName=#{mem_name}, email=#{email}, tel=#{tel}, team_num=#{team_num}, emp_type=#{emp_type}, vacation=#{vacation}, mem_img=#{mem_img}, salary=#{salary}
+         where mem_id=#{mem_id} 	 
     </update>
     
     <delete id="userDelete" parameterType="String">  
-        delete from user where memId=#{memId} 
+        delete from member where mem_id=#{mem_id} 
     </delete>
 
 </mapper>

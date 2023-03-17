@@ -4,7 +4,7 @@ public class BoardFree extends BoardCommon {
 
 	private int viewCount;
 	
-	BoardFree(){}
+	public BoardFree(){}
 
 	public BoardFree(int viewCount) {
 		super();

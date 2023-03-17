@@ -11,6 +11,7 @@ import com.mbcc.dao.memberDAO;
 import com.mbcc.frontController.Controller;
 import com.mbcc.vo.Member;
 
+
 public class LoginCheckController implements Controller {
 
 	@Override
