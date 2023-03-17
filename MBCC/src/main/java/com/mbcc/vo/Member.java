@@ -2,7 +2,7 @@ package com.mbcc.vo;
 
 import java.util.Date;
 
-public class Member {
+public class Member extends teamVo {
 	
 	private int memNum;
     private String memId;
@@ -20,7 +20,7 @@ public class Member {
     private int salary;
     private String role;
     
-    Member(){}
+    public Member(){}
     
 	public Member(int memNum, String memId, String memPwd, String memName, String memImg, String gender,
 			String birthday, Date empDate, String email, String tel, int teamNum, int empType, int vacation, int salary,

@@ -17,7 +17,7 @@ $("#login").click(function() {
 					$("#pw").val("");
 				} else {
 					alert(data + "님 환영합니다");
-					window.location.href = "/task.do";
+					window.location.href = ctx+"/main.do";
 				}
 			},
 			error: function(request, status, error) {

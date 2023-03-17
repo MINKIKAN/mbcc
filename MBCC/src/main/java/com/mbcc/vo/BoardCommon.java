@@ -13,7 +13,7 @@ public class BoardCommon {
     private int memNum;
     private int fileId;
 
-    BoardCommon(){}
+    public BoardCommon(){}
 
 	public BoardCommon(int boardId, String boardType, String boardTitle, String boardContent, Timestamp createDate,
 			Timestamp updateDate, int memNum, int fileId) {

@@ -1,4 +1,6 @@
 package com.mbcc.dao;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import com.mbcc.util.MybatisConfig;
 import com.mbcc.vo.Member;
@@ -18,6 +20,13 @@ public class memberDAO {
 	   String memId=session.selectOne("mapper.member.userLogin", member);
 	   session.close();
 	   return memId;
+   }
+   
+   public List<Member> selectAllUsers() {
+	   SqlSession session=MybatisConfig.getInstance().openSession(true);
+	   List<Member> mList=session.selectList("mapper.member.selectAllUsers");
+	   return mList;
+	    
    }
    
    public String checkValidId(String id) {

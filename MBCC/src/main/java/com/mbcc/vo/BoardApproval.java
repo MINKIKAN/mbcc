@@ -11,7 +11,7 @@ public class BoardApproval extends BoardCommon {
     private Timestamp approvalDate;
     private Timestamp dueDate;
 	
-    BoardApproval(){}
+    public BoardApproval(){}
 
 	public BoardApproval(int requestorMemNum, int approverMemNum, String approvalType, String approvalStatus,
 			Timestamp approvalDate, Timestamp dueDate) {
