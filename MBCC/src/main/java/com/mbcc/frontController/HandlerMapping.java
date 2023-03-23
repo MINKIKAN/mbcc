@@ -6,6 +6,7 @@ import com.mbcc.controller.member.LoginCheckController;
 import com.mbcc.controller.member.MainController;
 import com.mbcc.controller.member.MemberInsertController;
 import com.mbcc.controller.member.ValidateIdController;
+import com.mbcc.controller.calendar.CalendarController;
 import com.mbcc.controller.drive.DriveController;
 import com.mbcc.controller.meeting.MeetingController;
 import com.mbcc.controller.member.AddMemberController;
@@ -30,6 +31,7 @@ public class HandlerMapping {
 		mappings.put("/mk/addMember.do", new MemberInsertController());
 		mappings.put("/addMember.do", new AddMemberController());
 		mappings.put("/validateId.do", new ValidateIdController());
+		mappings.put("/calendar.do", new CalendarController());
 	}
 
 	public Controller getController(String key) {
