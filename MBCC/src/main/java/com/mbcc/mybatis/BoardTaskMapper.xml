@@ -27,5 +27,15 @@
         FROM board_common bc
         JOIN board_task bt ON bc.board_id = bt.board_id
     </select>
+	
+	<insert id="insertBoardCommon" parameterType="map" useGeneratedKeys="true" keyProperty="id" keyColumn="board_id">
+	  INSERT INTO board_common (board_type, board_title, board_content, create_date, update_date, mem_num, file_id)
+	  VALUES (#{boardType}, #{boardTitle}, #{boardContent}, #{createDate}, #{updateDate}, #{memNum}, #{fileId});
+	</insert>
+	
+	<insert id="insertBoardTask" parameterType="map">
+	  INSERT INTO board_task (board_id, responsible_mem_num, team_num, progress)
+	  VALUES (LAST_INSERT_ID(), #{responsibleMemNum}, #{teamNum}, #{progress});
+	</insert>
     
 </mapper>

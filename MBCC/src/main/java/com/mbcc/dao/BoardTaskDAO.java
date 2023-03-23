@@ -19,4 +19,13 @@ public class BoardTaskDAO {
 		session.close();
 		return list;
 	}
+	
+	public void writeNewTask(BoardTask newTask) {
+	    SqlSession session = MybatisConfig.getInstance().openSession(true);
+	    session.insert("mapper.boardTask.insertBoardCommon", newTask);
+	    session.insert("mapper.boardTask.insertBoardTask", newTask);
+	    session.close();
+	}
+
+
 }

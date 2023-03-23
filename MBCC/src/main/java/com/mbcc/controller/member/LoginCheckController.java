@@ -33,7 +33,7 @@ public class LoginCheckController implements Controller {
 		HttpSession session = request.getSession();
 		if(userid!=null) {
 			session.setAttribute("id", id);
-			
+			System.out.println(session.getAttribute("id"));
 			if(userid.equals("admin")) {
 				session.setAttribute("admin", id);
 			}
