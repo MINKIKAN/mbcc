@@ -15,7 +15,7 @@
 		<result property="memImg" column="mem_img"/>
 		<result property="gender" column="gender"/>
 		<result property="birthday" column="birthday"/>		
-		<result property="empDate" column="emp_date"/>
+	    <result property="empDate" column="emp_date"/>
 		<result property="email" column="email"/>
 		<result property="tel" column="tel"/>
 		<result property="teamNum" column="team_num"/>
@@ -42,7 +42,7 @@
     </select>
     
     <select id="validId" resultType="String" parameterType="String">
-        select mem_id from user where mem_id=#{memId}        
+        select mem_id from member where mem_id=#{id}        
     </select>
     
     <select id="getOneUser" parameterType="String" resultMap="member">
@@ -50,7 +50,7 @@
     </select>
     	
     <insert id="userInsert" parameterType="member">
-        INSERT INTO user (mem_id, mem_pwd, mem_name, mem_img, gender, birthday, emp_date, email, tel, team_num, emp_type, vacation, salary)
+        INSERT INTO member (mem_id, mem_pwd, mem_name, mem_img, gender, birthday, emp_date,  email, tel, team_num, emp_type, vacation, salary, role)
         VALUES(
         #{memId},
         #{memPwd},
@@ -64,7 +64,7 @@
         #{teamNum},
         #{empType},
         #{vacation},
-        #{salary}
+        #{salary},
         #{role}
         )       
     </insert>

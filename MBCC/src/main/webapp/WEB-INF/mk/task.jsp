@@ -341,6 +341,9 @@ body {
 
 [class*="task-main-side-header-content"] {
     font-size: 20px;
+}
+.task-main-side-header-content {
+    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

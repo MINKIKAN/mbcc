@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h1> 사원 목록 </h1>
-	<table class=" py-10 table table-bordered">
+	<table class="table table-striped table-hover">
 	
 			<tr>
 				<td>사원 번호</td>
@@ -27,6 +27,7 @@
 				<td>소속팀</td>
 				<td>직급 </td>
 				<td>급여</td>
+				<td>정보확인</td>
 			</tr>
 		
 		
