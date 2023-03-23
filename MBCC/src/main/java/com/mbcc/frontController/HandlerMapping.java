@@ -5,9 +5,10 @@ import java.util.HashMap;
 import com.mbcc.controller.member.LoginCheckController;
 import com.mbcc.controller.member.MainController;
 import com.mbcc.controller.member.MemberInsertController;
+import com.mbcc.controller.member.ValidateIdController;
 import com.mbcc.controller.drive.DriveController;
 import com.mbcc.controller.meeting.MeetingController;
-
+import com.mbcc.controller.member.AddMemberController;
 import com.mbcc.controller.member.AddressListController;
 import com.mbcc.controller.member.LogOutController;
 import com.mbcc.controller.task.BoardTaskController;
