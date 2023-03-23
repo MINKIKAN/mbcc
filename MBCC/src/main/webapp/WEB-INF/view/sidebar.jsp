@@ -9,7 +9,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                         
-                        <a class="nav-link" href="#" onclick="asyncMovePage('home.jsp')">
+                        <a class="nav-link" href="#" onclick="asyncMovePage('main.do')">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Main
                         </a>
@@ -33,7 +33,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Approval
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('calendar.html')">
+                        <a class="nav-link" href="#" onclick="asyncMovePage('calendar.do')">
                             <div class="sb-nav-link-icon"><i class="fa-regular fa-comet"></i></div>
                             Calendar
                         </a>

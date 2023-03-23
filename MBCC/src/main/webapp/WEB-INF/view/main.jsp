@@ -5,7 +5,9 @@
 <%@ include file="sidebar.jsp" %>
 
 	<main>
-		<div id="bodyContents"></div>
+		<div id="bodyContents">
+			<%@ include file="maintemplate.jsp" %>
+		</div>
 	</main>
 	
 <%@ include file= "footer.jsp" %>

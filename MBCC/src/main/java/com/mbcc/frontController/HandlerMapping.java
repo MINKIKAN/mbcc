@@ -6,6 +6,7 @@ import com.mbcc.controller.member.LoginCheckController;
 import com.mbcc.controller.member.MainController;
 import com.mbcc.controller.member.MemberInsertController;
 import com.mbcc.controller.member.ValidateIdController;
+import com.mbcc.controller.approval.ApprovalController;
 import com.mbcc.controller.drive.DriveController;
 import com.mbcc.controller.meeting.MeetingController;
 import com.mbcc.controller.member.AddMemberController;
@@ -19,8 +20,10 @@ public class HandlerMapping {
 
 	public HandlerMapping() {
 		mappings = new HashMap<String, Controller>();
+		mappings.put("/main.do", new MainController());
 		mappings.put("/task.do", new BoardTaskController());
 		mappings.put("/taskwrite.do", new BoardTaskWriteController());
+		mappings.put("/approval.do", new ApprovalController());
 		mappings.put("/meeting.do", new MeetingController());
 		mappings.put("/drive.do", new DriveController());
 		mappings.put("/insertmember.do", new MemberInsertController());

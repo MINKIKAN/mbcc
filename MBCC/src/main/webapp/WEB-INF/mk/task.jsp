@@ -292,6 +292,14 @@
 		  centerRight.appendChild(frame);
 		}
 
+	$(document).ready(function() {
+	  $(document).on('change', '.detail-frametop-board-progress', function() {
+		  var progress = $(this).val();
+	    alert("i've change my value");
+	    console.log("i've change my value");
+	  });
+	});
+
 
 	
 </script>
