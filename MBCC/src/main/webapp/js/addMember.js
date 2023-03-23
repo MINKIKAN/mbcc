@@ -1,5 +1,5 @@
 let check = 0;
-let ctx = $("#msg").attr("data-val");
+let ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 
 function idcheck(){
 	 if($.trim($("#id").val())==''){
@@ -20,13 +20,14 @@ function idcheck(){
 
 function getResult(data){	
 	 if(data == "null"){
-		 $("#msg").html("사용가능한 id 입니다.");
+		 alert("사용가능한 아이디 입니다.");
+	
 		 $("#pw").focus();
 		 $("#id").css("border", "3px blue solid")
 		 check = 1;
 	
 	 }else{
-	 $("#msg").html("이미 사용하고 있는 id 입니다.");
+	 alert("이미 사용하고 있는 id 입니다.");
 		 $("#id").val("");
 		 $("#id").focus();
 		 $("#id").css("border", "3px red solid")
@@ -61,14 +62,15 @@ function validCheck(form){
 		return false;
 	}
 	
-	if(!form.phone.value.match( /010-\d{3,4}-\d{4}/)){
+	if(!form.tel.value.match( /010-\d{3,4}-\d{4}/)){
 		$("#msg").html("전화번호 형식이 다릅니다");
-		form.phone.value="010-1234-1234";
-		form.phone.focus();
+		form.tel.value="010-1234-1234";
+		form.tel.focus();
 		return false;
 	}
-	
 	form.submit();
+	
+	alert("회원가입에 성공 하였습니다")
 	
 }
 

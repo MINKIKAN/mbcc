@@ -15,7 +15,6 @@ public class memberDAO {
 	}
    
    public String userLogin(Member member) {
-	   System.out.println("test");
 	   SqlSession session= MybatisConfig.getInstance().openSession(true);
 	   String memId=session.selectOne("mapper.member.userLogin", member);
 	   session.close();
@@ -37,6 +36,7 @@ public class memberDAO {
    }
    
    public int addUser(Member member) {
+	   System.out.println("test2");
 	   SqlSession session= MybatisConfig.getInstance().openSession(true);
 	   int cnt=session.insert("mapper.member.userInsert", member);
 	   session.close();

@@ -199,7 +199,7 @@ body {
 }
 
 .task-main-side-header-content {
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

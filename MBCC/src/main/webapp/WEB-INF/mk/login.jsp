@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="kr">
   <head>
@@ -28,12 +30,12 @@
         <div id="loginBoxTitle">MBCC PROJECT</div>
         <!-- 아이디, 비번, 버튼 박스 -->
       <div id="inputBox">
-  <div class="input-form-box"><span>아이디 </span><input type="text" id="id" name="id" class="form-control"></div>
-  <div class="input-form-box"><span>비밀번호 </span><input type="password" id="pw"  name="pw" class="form-control"></div>
+  <div class="input-form-box"><span style="margin-right: 20px ">아이디 </span><input type="text" id="id" name="id" class="form-control"></div>
+  <div class="input-form-box" ><span style="margin-right:20px">비밀번호 </span><input type="password" id="pw"  name="pw" class="form-control"></div>
   <div class="button-login-box" >
-    <button id="login" class="btn btn-primary mx-3" style="width:100%">로그인</button>
-    <a id="insertmember" href="#">회원가입</a>
-    <a id="findPw" href="#">비밀번호 찾기</a>
+    <button id="login" class="btn btn-primary " style="width:100%">로그인</button>
+    <a id="insertmember" href="#" onclick="location.href='${ctx}/mk/addMember.do'" >회원가입</a>
+    <a id="findPw" href="#" onclick="location.href='${ctx}mk/addMember.jsp'">비밀번호 찾기</a>
   </div>
 </div>
 

@@ -1,11 +1,12 @@
-let ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+let ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	
 
 $("#login").click(function() {
 	
 	if (checkIt()) {
 		$.ajax({
 			type: "post",
-			url: ctx + "/loginCheck.do",
+			url:ctx +"/loginCheck.do",
 			data: {
 				id: $("#id").val(),
 				pw: $("#pw").val()
@@ -27,6 +28,8 @@ $("#login").click(function() {
 
 	}
 });
+
+
 
 function checkIt() {
 	console.log($("#id").val());

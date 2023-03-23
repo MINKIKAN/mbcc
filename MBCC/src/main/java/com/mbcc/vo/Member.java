@@ -11,10 +11,10 @@ public class Member extends teamVo {
     private String memImg;
     private String gender;
     private String birthday;
-    private Date empDate;
+    private String empDate;
     private String email;
     private String tel;
-    private int teamNum;
+	private int teamNum;
     private int empType;
     private int vacation;
     private int salary;
@@ -23,7 +23,7 @@ public class Member extends teamVo {
     public Member(){}
     
 	public Member(int memNum, String memId, String memPwd, String memName, String memImg, String gender,
-			String birthday, Date empDate, String email, String tel, int teamNum, int empType, int vacation, int salary,
+			String birthday, String empDate,String photo, String email, String tel, int teamNum, int empType, int vacation, int salary,
 			String role) {
 		super();
 		this.memNum = memNum;
@@ -40,6 +40,7 @@ public class Member extends teamVo {
 		this.empType = empType;
 		this.vacation = vacation;
 		this.salary = salary;
+		
 		this.role = role;
 	}
 
@@ -99,11 +100,11 @@ public class Member extends teamVo {
 		this.birthday = birthday;
 	}
 
-	public Date getEmpDate() {
+	public String getEmpDate() {
 		return empDate;
 	}
 
-	public void setEmpDate(Date empDate) {
+	public void setEmpDate(String empDate) {
 		this.empDate = empDate;
 	}
 
@@ -162,5 +163,9 @@ public class Member extends teamVo {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	
+
+	
 
 }
