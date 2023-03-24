@@ -37,5 +37,9 @@
 	  INSERT INTO board_task (board_id, responsible_mem_num, team_num, progress)
 	  VALUES (LAST_INSERT_ID(), #{responsibleMemNum}, #{teamNum}, #{progress});
 	</insert>
+	
+	<update id="updateBoardTaskProgress" parameterType="map">
+      UPDATE board_task SET progress = #{progress} WHERE board_id = #{boardId}
+    </update>
     
 </mapper>
