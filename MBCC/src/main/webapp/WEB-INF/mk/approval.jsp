@@ -1,49 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <div class="task-grid">
-		<div class="task-main-top">
-			<h2 id="task-title">결재</h2>
+    <div class="approval-grid">
+		<div class="approval-main-top">
+			<h2 id="approval-title">결재</h2>
 			<div class="">
-				<fieldset>
+				<fieldset class="approval-main-top-mode-select">
 				  <label>
-				    <input type="radio" name="contact" value="write-mode" checked />
-				    <span>기안 작성</span>
+				    <input type="radio" id="contact" name="contact" value="write-mode" checked />
+				    <span>새 기안</span>
 				  </label>
 				
 				  <label>
-				    <input type="radio" name="contact" value="view-mode" />
+				    <input type="radio" id="contact" name="contact" value="view-mode" />
 				    <span>문서 확인</span>
 				  </label>
 				</fieldset>
 			</div>
 		</div>
 		
-		<div class="task-main-side">
-			<div class="task-main-side-header">
-				<div class="task-main-side-header-content task-main-side-header-content-sort-todo" style="width:100%;" onclick="sideHeaderContentClickTodo()">요청된 기안</div>
-				<div class="task-main-side-header-content task-main-side-header-content-sort-inprogress" style="width:100%;" onclick="sideHeaderContentClickInprogress()">승인된 기안</div>
-				<div class="task-main-side-header-content task-main-side-header-content-sort-done" style="width:100%;" onclick="sideHeaderContentClickDone()">반려된 기안</div>
+		<div class="approval-main-side">
+			<div class="approval-main-side-header">
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-todo" style="width:100%;" onclick="sideHeaderContentClickTodo()">요청된 문서</div>
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-inprogress" style="width:100%;" onclick="sideHeaderContentClickInprogress()">승인된 문서</div>
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-done" style="width:100%;" onclick="sideHeaderContentClickDone()">반려된 문서</div>
 			</div>
 			<hr>
-			<div class="task-main-side-body">
-				<div class="task-main-side-header-content task-main-side-header-content-sort-entire" style="width:100%;" onclick="sideHeaderContentClickEntire()">전체 업무</div>
-				<div class="task-main-side-header-content task-main-side-header-content-sort-responsiblememnum" style="width:100%;" onclick="sideHeaderContentClickResponsibleMemNum()">담당 업무</div>
-				<div class="task-main-side-header-content-sort-teamnum" style="width:100%;" onclick="">참조 업무</div>
-				<div class="task-main-side-header-content-sort-memnum" style="width:100%;" onclick="sideHeaderContentClickMemNum()">내가 쓴 업무</div>
-				<div class="task-main-side-header-content" style="width:100%;" onclick="">임시 보관함</div>
+			<div class="approval-main-side-body">
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-entire" style="width:100%;" onclick="sideHeaderContentClickEntire()">전체 업무</div>
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-responsiblememnum" style="width:100%;" onclick="sideHeaderContentClickResponsibleMemNum()">담당 업무</div>
+				<div class="approval-main-side-header-content-sort-teamnum" style="width:100%;" onclick="">참조 업무</div>
+				<div class="approval-main-side-header-content-sort-memnum" style="width:100%;" onclick="sideHeaderContentClickMemNum()">내가 쓴 업무</div>
+				<div class="approval-main-side-header-content" style="width:100%;" onclick="">임시 보관함</div>
 			</div>
 			<hr>
 		</div>
 		
-		<div class="task-main-center-left">
-		    <!-- <div class="task-main-center-left-tlist-section" onclick="showTlistContents(this)">
-		    	<div class="task-main-center-left-tlist-section-component"></div>
+		<div class="approval-main-center-left">
+		    <!-- <div class="approval-main-center-left-tlist-section" onclick="showTlistContents(this)">
+		    	<div class="approval-main-center-left-tlist-section-component"></div>
 		    </div> -->   	 
 		</div>
 		
-		<div class="task-main-center-right">
-		  <%@ include file="approvalaccordion.jsp" %>
+		<div class="approval-main-center-right">
+		  <div class="approval-main-center-right-write-form">
+		    <%@ include file="approvalview.jsp" %>
+		  </div>
 		</div>
 		
 	</div>
@@ -52,6 +54,15 @@
 </button>
 <%@ include file="approvaltemplate.jsp" %> --%>
 
+<script>
+  $(document).ready(function() {
+	  $(document).on('change','.approval-main-top-mode-select', function() {
+		  var radioValue=document.querySelector('#contact').value;
+		  alert(radioValue);
+	  })
+  })
+</script>
+
 <style>
 * {
     box-sizing: border-box;
@@ -59,11 +70,13 @@
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
-
 body {
     background-color: #f4f6f9;
 }
-.task-grid {
+#approval-title {
+    margin-left: 10px;
+}
+.approval-grid {
     display: grid;
     height: 100vh;
     grid-template-columns: 250px repeat(6, 1fr);
@@ -75,14 +88,14 @@ body {
     "side left left right right right right"
     "side left left right right right right";
 }
-.task-main-side {
+.approval-main-side {
     background-color: #ffffff;
     border-right: 1px solid #dee2e6;
     grid-area: side;
     padding: 10px;
 }
 
-[class*="task-main-side-header-content"] {
+[class*="approval-main-side-header-content"] {
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -91,11 +104,11 @@ body {
     cursor: pointer;
 }
 
-[class*="task-main-side-header-content"]:hover {
+[class*="approval-main-side-header-content"]:hover {
     background-color: #f4f6f9;
 }
 
-.task-main-top {
+.approval-main-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,26 +119,26 @@ body {
     padding: 10px;
 }
 
-.task-main-center-left {
+.approval-main-center-left {
     border-right: 1px solid #dee2e6;
     grid-area: left;
     background-color: #ffffff;
     overflow-y: scroll;
 }
 
-.task-main-center-left::-webkit-scrollbar {
+.approval-main-center-left::-webkit-scrollbar {
     width: 0px; /* 스크롤바 너비를 설정합니다. */
 }
 
-.task-main-center-left::-webkit-scrollbar-thumb {
+.approval-main-center-left::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.5); /* 스크롤바 배경색을 반투명하게 설정합니다. */
 }
 
-.task-main-center-left::-webkit-scrollbar-track {
+.approval-main-center-left::-webkit-scrollbar-track {
     background: transparent; /* 스크롤바 트랙을 투명하게 만듭니다. */
 }
 
-.task-main-center-left-tlist-section {
+.approval-main-center-left-tlist-section {
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -135,22 +148,22 @@ body {
     cursor: pointer;
 }
 
-.task-main-center-left-tlist-section:hover {
+.approval-main-center-left-tlist-section:hover {
     background-color: #f4f6f9;
 }
 
-.task-main-center-right {
+.approval-main-center-right {
     grid-area: right;
     background-color: #ffffff;
 }
 
-.task-main-center-right-frame {
+.approval-main-center-right-frame {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.task-main-center-right-frame-top {
+.approval-main-center-right-frame-top {
   border-top:solid lightgray 1px;
   border-bottom:solid lightgray 1px;
   width: 98%;
@@ -162,7 +175,7 @@ body {
   padding: 20px;
 }
 
-.task-main-center-right-frame-bottom {
+.approval-main-center-right-frame-bottom {
   border-bottom:solid lightgray 1px;
   width: 98%;
   height: 80%;

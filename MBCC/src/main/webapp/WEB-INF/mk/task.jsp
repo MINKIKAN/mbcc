@@ -397,10 +397,24 @@
 	// task mod ajax
 	$(document).ready(function() {
 		$(document).on('click', '#task-detail-modify-button', function() {
-			
-		})
-		
-	})
+			var boardId = $(this).closest('.task-main-center-right-frame').find('.task-board-id').val();
+			alert(boardId);
+			//준비중
+			/* $.ajax({
+				url: 'updatetask.do',
+				type: 'POST',
+				data: {
+					boardId:boardId
+				},
+				success: function(resopnse) {
+					alert("test");
+					asyncMovePage('task.do');
+				},
+				error: function(xhr, status, error) {
+				}
+			}); */
+		});
+	});
 
 </script>
 

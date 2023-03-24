@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
+<h1>vacation template must be here</h1>
+
 <c:set var="matchedMemName" value="" />
 <c:forEach items="${mlist}" var="member">
     <c:if test="${member.memId == sessionScope.id}">
@@ -12,7 +14,7 @@
 </c:forEach>
 
 <!-- 휴가 결재 템플릿 -->
-<div class="modal fade" id="vacationModal" tabindex="-1" role="dialog" styl="z-index:10000;"  aria-labelledby="vacationModalLabel" aria-hidden="true">
+<div class="modal fade" id="vacationModal" tabindex="-1" role="dialog" aria-labelledby="vacationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
