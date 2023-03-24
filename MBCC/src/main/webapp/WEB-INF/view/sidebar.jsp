@@ -23,7 +23,7 @@
                         </a>
                         <a class="nav-link" href="#" onclick="asyncMovePage('board.do')">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Board
+                            Notice
                         </a>
                         <a class="nav-link" href="#" onclick="asyncMovePage('Address.do')">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

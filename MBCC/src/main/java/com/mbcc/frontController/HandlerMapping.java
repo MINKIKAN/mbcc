@@ -23,7 +23,7 @@ import com.mbcc.controller.task.BoardTaskWriteController;
 
 public class HandlerMapping {
 	private HashMap<String, Controller> mappings;
-
+	
 	public HandlerMapping() {
 		mappings = new HashMap<String, Controller>();
 		mappings.put("/main.do", new MainController());
