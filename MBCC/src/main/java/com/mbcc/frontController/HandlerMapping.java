@@ -37,6 +37,7 @@ public class HandlerMapping {
 		mappings.put("/addMember.do", new AddMemberController());
 		mappings.put("/validateId.do", new ValidateIdController());
 		mappings.put("/calendar.do", new CalendarController());
+//		mappings.put("/ajax.do", new CalendarBoardController());
 	}
 
 	public Controller getController(String key) {
