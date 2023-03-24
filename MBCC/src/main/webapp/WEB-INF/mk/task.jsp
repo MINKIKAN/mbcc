@@ -74,6 +74,7 @@
 			      <input type="hidden" class="task-file-id" value="${vo.fileId}">
 			      <input type="hidden" class="task-responsible-mem-num" value="${vo.responsibleMemNum}">
 			      <input type="hidden" class="task-team-num" value="${vo.teamNum}">
+			      <input type="hidden" class="task-pgs" value="${vo.progress}">
 	    	</div>   	 
 		  	</c:forEach>
 		</div>
@@ -114,7 +115,6 @@
 	            <input type="hidden" id="fileId" name="fileId" value="1">
 	            <input type="hidden" id="progress" name="progress" value="TO_DO">
 		      <div class="modal-footer">
-		      매치드맴넘:${matchedMemNum}
 		        <button type="button" class="btn btn-primary" onclick="submitTaskForm(form)">등록</button>
 		      </div>
 		        </form>
@@ -126,7 +126,7 @@
 		
 			
 <script>
-
+	// 권정열 관련 스크립트
 	function filterTasks(progress) {
 	    var taskSections = document.querySelectorAll(".task-main-center-left-tlist-section");
 	
@@ -159,7 +159,6 @@
 	    filterTasks(null);
 	}
 	
-	// 페이지가 로드될 때 모든 항목을 기본으로 표시
 	document.addEventListener("DOMContentLoaded", function() {
 	    sideHeaderContentClickEntire();
 	});
@@ -172,34 +171,12 @@
 	
 	function submitTaskForm(form){
 		form.submit();
-		/* event.preventDefault(); // 기본 submit 동작을 막습니다.
-
-	    // FormData 객체를 생성하여 입력된 데이터를 가져옵니다.
-	    const formData = new FormData(form);
-
-	    // Fetch API를 사용하여 AJAX 요청을 전송합니다.
-	    fetch(form.action, {
-	        method: form.method,
-	        body: formData
-	    })
-	    .then(response => response.json())
-	    .then(data => {
-	        if (data.success) {
-	            alert('작업이 성공적으로 추가되었습니다.');
-	            // 필요한 경우, 여기에서 추가 작업을 수행하십시오. 예: 폼 초기화, 페이지 업데이트 등
-	        } else {
-	            alert('작업 추가에 실패했습니다.');
-	        }
-	    })
-	    .catch(error => {
-	        console.error('Error:', error);
-	        alert('작업 추가 중 오류가 발생했습니다.');
-	    }); */
 	}
 
+	// 우측단 구성 스크립트
 	function showTlistContents(data) {
 		  var boardTitle = data.querySelector('.task-board-title').textContent;
-		  var progress = data.querySelector('.task-main-center-left-tlist-section-component + h6').textContent;
+		  var progress = data.querySelector('.task-pgs').value;
 		  var hiddenInputs = data.querySelectorAll('input[type="hidden"]');
 
 		  var inputData = {
@@ -253,6 +230,13 @@
 		
 		  headerDiv.appendChild(progressSelect);
 		  
+		  // Create hidden input for task-board-id
+		  var hiddenBoardIdInput = document.createElement('input');
+		  hiddenBoardIdInput.type = 'hidden';
+		  hiddenBoardIdInput.setAttribute('class', 'task-board-id');
+		  hiddenBoardIdInput.value = inputData['task-board-id'];
+		  headerDiv.appendChild(hiddenBoardIdInput);
+		  
 		  var horizontalLine = document.createElement('hr');
 		  headerDiv.appendChild(horizontalLine);
 		  
@@ -292,16 +276,54 @@
 		  centerRight.appendChild(frame);
 		}
 
+	// 업무상황 변경 스크립트
 	$(document).ready(function() {
 	  $(document).on('change', '.detail-frametop-board-progress', function() {
-		  var progress = $(this).val();
-	    alert("i've change my value");
-	    console.log("i've change my value");
+		  var progress=$(this).val();
+		  var boardId = $(this).closest('.task-main-center-right-frame').find('.task-board-id').val();
+		  
+		  $.ajax({
+		      url: 'updateprogress.do',
+		      type: 'POST',
+		      data: {
+		      	boardId: boardId,
+		      	progress: progress
+		      },
+		      success: function(response) {
+		    	console.log(response);
+
+		    	var targetDiv = $(".task-main-center-left-tlist-section").find(".task-board-id[value='" + boardId + "']").parent();
+
+		    	var statusDiv = targetDiv.find("h6.task-main-center-left-tlist-section-component");
+		    	var progressText, progressClass;
+
+		    	switch (progress) {
+		    	  case 'TO_DO':
+		    	    progressText = '할 일\u00A0\u00A0';
+		    	    progressClass = 'task-status-to-do';
+		    	    break;
+		    	  case 'IN_PROGRESS':
+		    	    progressText = '진행 중\u00A0\u00A0';
+		    	    progressClass = 'task-status-in-progress';
+		    	    break;
+		    	  case 'DONE':
+		    	    progressText = '완료\u00A0\u00A0';
+		    	    progressClass = 'task-status-done';
+		    	    break;
+		    	}
+
+		    	statusDiv.removeClass("task-status-to-do task-status-in-progress task-status-done");
+
+		    	statusDiv.addClass(progressClass);
+		    	statusDiv.text(progressText + '  ');
+		   	  },
+		      error: function(xhr, status, error) {
+		      	console.error('업무진행 업데이트에 실패했습니다: ', error);
+		      	alert('업무진행 업데이트에 실패했습니다. 다시 시도해주세요.');
+		      }
+		  });
 	  });
 	});
-
-
-	
 </script>
 
 <style>
@@ -502,4 +524,50 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
+
+.detail-frametop-board-progress {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: right 10px center;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.detail-frametop-board-progress:hover {
+  border-color: #999;
+}
+
+.detail-frametop-board-progress:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 3px 1px rgba(74, 144, 226, 0.5);
+}
+
+.detail-frametop-board-progress::-ms-expand {
+  display: none;
+}
+
+.detail-frametop-board-progress option {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.detail-frametop-board-progress option:hover,
+.detail-frametop-board-progress option:focus {
+  background-color: #4a90e2;
+  color: #ffffff;
+}
+
 </style>
