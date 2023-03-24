@@ -2,7 +2,7 @@ package com.mbcc.vo;
 
 public class BoardFree extends BoardCommon {
 
-	private int viewCount;
+	private int viewCount; //조회수 
 	
 	public BoardFree(){}
 

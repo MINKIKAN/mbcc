@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.boardcommon">
+  
+	<resultMap id="BoardCommon" type="com.mbcc.vo.BoardCommon">
+		<id property="boardType" column="board_type" />
+		<result property="boardTitle" column="board_title" />
+		<result property="boardContent" column="board_content" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+		<result property="memNum" column="mem_num" />
+		<result property="fileId" column="file_id" />
+	</resultMap>
+
+	<select id="getAllNotice" resultMap="BoardCommon">
+		Select * FROM board_common ;
+	</select>
+
+	<insert id="insertNotice" parameterType="map" useGeneratedKeys="true" keyProperty="id" keyColumn="board_id">
+		INSERT INTO board_common (board_type, board_title, board_content, create_date, update_date, mem_num, file_id) 
+		VALUES (
+		#{boardType},
+		#{boardTitle},
+		#{boardContent},
+		#{createDate},
+		#{updateDate},
+		#{memNum},
+		#{fileId}
+		);
+	</insert>
+	
+	<update id="updateBoardCommon" parameterType="map">
+      UPDATE board_common 
+      SET title = #{board_title}, content = #{board_content}, updateDate=#{update_date}  WHERE board_id = #{boardId}
+    </update>
+	
+	<delete id="deleteBoardCommon" parameterType="String">
+    DELETE FROM board_common WHERE board_id = #{boardId}
+    WHERE board_id = #{boardId}
+</delete>
+
+	
+</mapper>
