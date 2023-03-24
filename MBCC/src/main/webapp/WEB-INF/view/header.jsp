@@ -7,8 +7,8 @@
     <head>
         <title>MBCC</title>
         <link rel="apple-touch-icon" sizes="180x180" href="${ctx}/WEB-INF/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="${ctx}/WEB-INF/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="${ctx}/WEB-INF/img/favicon-16x16.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="${ctx}/WEB-INF/img/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="${ctx}/WEB-INF/img/favicon-16x16.png">
 
         <meta charset="utf-8" />
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,29 +23,13 @@
 	   <!--  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> -->
 
         <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" "></script>
+	    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
 	    
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
 	  
-		
-		
-		
-	
-
-
-
-
-		
-	
-	
-<!-- 부가적인 테마 -->
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 
         <script>
-        
-	    	
-        
         function asyncMovePage(url) {
 	    		var ajaxOption={
 	    				url : url,
@@ -60,11 +44,6 @@
 	    			$('#bodyContents').html(data);
 	    		}); 
 	    	}
-	    	
-       
-        
-       
-	    
 	    </script>
         
     </head>

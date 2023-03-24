@@ -42,4 +42,12 @@
       UPDATE board_task SET progress = #{progress} WHERE board_id = #{boardId}
     </update>
     
+	<delete id="deleteBoardTaskByBoardId">
+      DELETE FROM board_task WHERE board_id = #{boardId}
+	</delete>
+
+	<delete id="deleteBoardCommonByBoardId">
+      DELETE FROM board_common WHERE board_id = #{boardId}
+	</delete>
+    
 </mapper>

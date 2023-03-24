@@ -37,4 +37,18 @@ public class BoardTaskDAO {
         session.update("mapper.boardTask.updateBoardTaskProgress", paramMap);
         session.close();
     }
+	
+	public void deleteTask(int boardId) {
+        SqlSession session = MybatisConfig.getInstance().openSession(true);
+        try {
+            session.delete("mapper.boardTask.deleteBoardTaskByBoardId", boardId);
+            session.delete("mapper.boardTask.deleteBoardCommonByBoardId", boardId);
+        } 
+        catch(Exception e) {
+            e.printStackTrace();
+        } 
+        finally {
+            session.close();
+        }
+    }
 }

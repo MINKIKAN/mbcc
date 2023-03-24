@@ -15,6 +15,7 @@ import com.mbcc.controller.member.AddressListController;
 import com.mbcc.controller.member.LogOutController;
 import com.mbcc.controller.task.BoardTaskChangePgController;
 import com.mbcc.controller.task.BoardTaskController;
+import com.mbcc.controller.task.BoardTaskDeleteController;
 import com.mbcc.controller.task.BoardTaskWriteController;
 
 public class HandlerMapping {
@@ -25,6 +26,7 @@ public class HandlerMapping {
 		mappings.put("/main.do", new MainController());
 		mappings.put("/task.do", new BoardTaskController());
 		mappings.put("/taskwrite.do", new BoardTaskWriteController());
+		mappings.put("/deletetask.do", new BoardTaskDeleteController());
 		mappings.put("/updateprogress.do", new BoardTaskChangePgController());
 		mappings.put("/approval.do", new ApprovalController());
 		mappings.put("/meeting.do", new MeetingController());

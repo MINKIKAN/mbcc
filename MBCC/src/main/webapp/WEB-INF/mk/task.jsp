@@ -79,7 +79,14 @@
 		  	</c:forEach>
 		</div>
 		
-		<div class="task-main-center-right"> <div class="task-main-center-right-frame"><div class="task-main-center-right-frame-top"></div><div class="task-main-center-right-frame-bottom"></div></div> </div>
+		<div class="task-main-center-right">
+		  <div class="task-main-center-right-frame">
+		    <div class="task-main-center-right-frame-top"></div>
+		    <div class="task-main-center-right-frame-bottom">
+		      <div class="task-main-center-right-frame-bottom-delmodBtn-area"></div>
+		    </div>
+		  </div>
+		</div>
 		
 	</div>
 	
@@ -91,7 +98,7 @@
 	        </div>
 	        <div class="modal-body">
 	          <!-- 업무 작성 양식 -->
-	          <form id="taskForm" action="${ctx}/taskwrite.do" method="POST">
+	          <form id="taskForm">
 	            <div class="form-group mb-3">
 	              <label for="taskTitle" class="form-label">제목</label>
 	              <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요">
@@ -169,8 +176,19 @@
 	    });
 	});
 	
-	function submitTaskForm(form){
-		form.submit();
+	function submitTaskForm(form) {
+	  $.ajax({
+	    url: 'taskwrite.do',
+	    type: 'POST',
+	    data: $('#taskForm').serialize(),
+	    success: function(response) {
+	      asyncMovePage('task.do');
+	      $('#taskModal').modal('hide');
+	    },
+	    error: function(xhr, status, error) {
+	      // 에러 처리
+	    }
+	  });
 	}
 
 	// 우측단 구성 스크립트
@@ -258,6 +276,7 @@
 		  // Move the inputFields content creation inside the headerWrapper
 		  inputFields.forEach(function (field) {
 		    var div = document.createElement('div');
+		    div.classList.add('detail-frametop-board-info');
 		    div.textContent = field.label + ": " + inputData[field.key];
 		    headerWrapper.appendChild(div);
 		  });
@@ -269,7 +288,36 @@
 
 		  var frameBottom = document.createElement('div');
 		  frameBottom.classList.add('task-main-center-right-frame-bottom');
-		  frameBottom.textContent = inputData['task-board-content'];
+		  
+		  // ss
+
+		  var contentDiv = document.createElement('div');
+		  contentDiv.textContent = inputData['task-board-content'];
+		  frameBottom.appendChild(contentDiv);
+
+		  var buttonDiv = document.createElement('div');
+		  buttonDiv.classList.add('task-main-center-right-frame-bottom-delmodBtn-area');
+
+		  var editButton = document.createElement('button');
+		  editButton.classList.add('btn', 'btn-primary');
+		  editButton.setAttribute('id', 'task-detail-modify-button');
+		  editButton.textContent = '수정';
+		  editButton.addEventListener('click', function () {
+  		  // Edit button click handler
+		  });
+
+		  var deleteButton = document.createElement('button');
+		  deleteButton.classList.add('btn', 'btn-danger');
+		  deleteButton.setAttribute('id', 'task-detail-delete-button');
+		  deleteButton.textContent = '삭제';
+		  deleteButton.addEventListener('click', function () {
+		  // Delete button click handler
+		  });
+
+		  buttonDiv.appendChild(editButton);
+		  buttonDiv.appendChild(deleteButton);
+		  frameBottom.appendChild(buttonDiv);
+		  //ss
 
 		  frame.appendChild(frameBottom);
 
@@ -324,6 +372,36 @@
 		  });
 	  });
 	});
+	
+	// task del ajax
+	$(document).ready(function() {
+	  $(document).on('click', '#task-detail-delete-button', function() {
+		  var boardId = $(this).closest('.task-main-center-right-frame').find('.task-board-id').val();
+		  
+		  $.ajax({
+		      url: 'deletetask.do',
+		      type: 'POST',
+		      data: {
+		      	boardId: boardId
+		      },
+		      success: function(response) {
+		    	alert("삭제 성공");
+		    	asyncMovePage('task.do');
+		   	  },
+		      error: function(xhr, status, error) {
+		      }
+		  });
+	  });
+	});
+	
+	// task mod ajax
+	$(document).ready(function() {
+		$(document).on('click', '#task-detail-modify-button', function() {
+			
+		})
+		
+	})
+
 </script>
 
 <style>
@@ -507,6 +585,12 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom:30px;
+}
+
+.detail-frametop-board-info {
+  color: gray;
+  font-size: 12px;
 }
 
 .detail-frametop-board-title {
@@ -569,5 +653,18 @@ body {
   background-color: #4a90e2;
   color: #ffffff;
 }
+
+.task-main-center-right-frame-bottom-delmodBtn-area {
+  width:110px;
+  display:flex;
+  justify-content: space-between;
+  height: 2em;
+  position: fixed;
+  bottom: 0;
+  right:0;
+  margin-bottom:40px;
+}
+
+
 
 </style>
