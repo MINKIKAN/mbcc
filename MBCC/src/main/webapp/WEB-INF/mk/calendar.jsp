@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 	<script type="text/javascript">
+	/* let ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2)); */
+	
 	 $(document).ready(function(){
-			console.log("Test");
 			var calendarEl = document.getElementById('calendar');
 			calendar = new FullCalendar.Calendar(calendarEl, {
 				timeZone : 'UTC',
@@ -39,7 +41,7 @@
 									console.log(info.startStr);
 									console.log(end_date);
 									$.ajax({
-										url : '${ctx}/test.do',
+										url : '${ctx}/insertCal.do',
 										type : 'GET',
 										data : {
 											"title" : content,

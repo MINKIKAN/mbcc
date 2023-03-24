@@ -6,9 +6,7 @@
 <html lang="en">
     <head>
         <title>MBCC</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="${ctx}/WEB-INF/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="${ctx}/WEB-INF/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="${ctx}/WEB-INF/img/favicon-16x16.png">
+   
 
         <meta charset="utf-8" />
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />

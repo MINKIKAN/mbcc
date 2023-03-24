@@ -48,6 +48,10 @@
     <select id="getOneUser" parameterType="String" resultMap="member">
     	 SELECT * FROM member where mem_id=#{memId} 
     </select>
+    
+    <select id="isAdminOrUser" resultType="String">
+    SELECT COUNT(*) FROM member WHERE mem_id = #{mem_id} AND role IN ('ADMIN', 'USER')
+</select>
     	
     <insert id="userInsert" parameterType="member">
         INSERT INTO member (mem_id, mem_pwd, mem_name, mem_img, gender, birthday, emp_date,  email, tel, team_num, emp_type, vacation, salary, role)
