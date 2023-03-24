@@ -1,6 +1,5 @@
 package com.mbcc.vo;
 
-import java.util.Date;
 
 public class Member extends teamVo {
 	

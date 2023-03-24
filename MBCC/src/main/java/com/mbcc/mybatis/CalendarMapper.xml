@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.calendar">
+  
+	<resultMap id="calVo" type="com.mbcc.vo.CalVo">
+		<id property="num" column="num" />
+		<result property="title" column="title" />
+		<result property="start" column="start_date" />
+		<result property="end" column="end_date" />
+	</resultMap>
+
+	<select id="getCal" resultMap="calVo">
+		Select * FROM calendar_board ;
+	</select>
+
+	<insert id="insertCal" parameterType="CalVo">
+		INSERT INTO calendar_board (title, start_date, end_date) VALUES (
+		#{title},
+		#{start},
+		#{end}
+		);
+	</insert>
+	
+	<delete id="deleteCal" parameterType="String">
+    DELETE FROM calendar_board
+    WHERE num=#{num};
+</delete>
+
+	
+</mapper>

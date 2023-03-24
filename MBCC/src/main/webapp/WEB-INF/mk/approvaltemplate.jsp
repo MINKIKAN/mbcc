@@ -12,7 +12,7 @@
 </c:forEach>
 
 <!-- 휴가 결재 템플릿 -->
-<div class="modal fade" id="vacationModal" tabindex="-1" role="dialog" aria-labelledby="vacationModalLabel" aria-hidden="true"  z-index="1050">
+<div class="modal fade" id="vacationModal" tabindex="-1" role="dialog" styl="z-index:10000;"  aria-labelledby="vacationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
