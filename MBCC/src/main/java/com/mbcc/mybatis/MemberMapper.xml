@@ -50,7 +50,7 @@
     </select>
     
     <select id="isAdminOrUser" resultType="String">
-    SELECT * FROM member WHERE mem_id = #{mem_id} AND role IN ("ADMIN")
+    SELECT COUNT(*) FROM member WHERE mem_id = #{mem_id} AND role IN ('ADMIN', 'USER')
 </select>
     	
     <insert id="userInsert" parameterType="member">
@@ -85,8 +85,8 @@
          where mem_id=#{mem_id} 	 
     </update>
     
-    <delete id="userDelete" parameterType="String">  
-        delete from member where mem_id=#{mem_id} 
+    <delete id="userDelete" parameterType="int">  
+        delete from member where mem_num=#{mem_num} 
     </delete>
 
 </mapper>

@@ -6,6 +6,7 @@ import com.mbcc.controller.member.LoginCheckController;
 import com.mbcc.controller.member.MainController;
 import com.mbcc.controller.member.MemberInsertController;
 import com.mbcc.controller.member.ValidateIdController;
+import com.mbcc.controller.member.deleteMeberController;
 import com.mbcc.controller.notice.BoardNoticeWriteController;
 import com.mbcc.controller.notice.noticeShowController;
 import com.mbcc.controller.approval.ApprovalController;
@@ -45,11 +46,12 @@ public class HandlerMapping {
 		mappings.put("/validateId.do", new ValidateIdController());
 		mappings.put("/calendar.do", new CalendarController());
 		mappings.put("/ajax.do", new CalendarShowController());
-		mappings.put("/del.do", new CalendarDeleteController());
+		mappings.put("/delCalendar.do", new CalendarDeleteController());
 		mappings.put("/insertCal.do", new CalendarInsertController());
 		mappings.put("/notice.do", new noticeShowController());
 		mappings.put("/NoticeWrite.do", new BoardNoticeWriteController());
 		mappings.put("/checkRole.do", new BoardNoticeWriteController());
+		mappings.put("/deleteMember.do", new deleteMeberController());
 		
 	}
 

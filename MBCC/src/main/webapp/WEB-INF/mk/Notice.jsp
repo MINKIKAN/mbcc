@@ -76,9 +76,12 @@
 </style>
 <body>
 <h1>공지사항</h1>
-<%-- <input type="text" id="memNum" name="memNum" value="${matchedMemRole}"> --%>
+ <input type="text" id="memNum" name="memNum" value="${matchedMemRole}"> 
 <div class="write" > 
+
+<c:if test="${matchedMemRole == 'ADMIN'}">
 <button id="task-addBtn" type="button" data-toggle="modal" data-target="#taskModal" style="width:8%">글쓰기</button>
+</c:if>
 </div>
  
 	<div class="notice_list">
@@ -104,7 +107,7 @@
 	    <div class="modal-dialog modal-lg" role="document">
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <h5 class="modal-title" id="taskNoticeLabel">새 공지 작정</h5>
+	          <h5 class="modal-title" id="taskNoticeLabel">새 공지 작성</h5>
 	        </div>
 	        <div class="modal-body">
 	          <!-- 업무 작성 양식 -->
@@ -132,9 +135,13 @@
 		</div>
 	
 	<script>
+	var check=${member.role}
+	
 	$(document).ready(function() {
 	    $('#task-addBtn').on('click', function() {
+		
 	        $('#noticeModal').modal('show');
+		
 	    });
 	});
 	

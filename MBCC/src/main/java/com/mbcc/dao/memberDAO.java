@@ -58,11 +58,11 @@ public class memberDAO {
 	   return cnt;
    }
    
-   public int removeUser(String id) {
+   public int removeUser(int num) {
 	   SqlSession session= MybatisConfig.getInstance().openSession(true);
-	   int cnt=session.insert("mapper.member.userDelete", id);
+	   int delMemNum=session.insert("mapper.member.userDelete", num);
 	   session.close();
-	   return cnt;
+	   return delMemNum;
    }
    
    public String confirm(String id) {
