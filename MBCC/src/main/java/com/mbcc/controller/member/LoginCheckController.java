@@ -21,13 +21,16 @@ public class LoginCheckController implements Controller {
 		String id = request.getParameter("id"); 
 		String pw = request.getParameter("pw");
 		
+		
 		memberDAO dao = memberDAO.getInstance();
 		Member mem = new Member();
 		mem.setMemId(id);
 		mem.setMemPwd(pw);
 		
+		
 	
-		String userid = dao.userLogin(mem);  // 값이 없으면 null 리턴함 
+		String userid = dao.userLogin(mem);  // 값이 없으면 null 리턴함
+		
 		System.out.println("userid=" + userid);
 		
 		HttpSession session = request.getSession();

@@ -33,6 +33,11 @@ input[type=submit], input[type=reset] {
 <body>
 	<h1 class="py-3">회원 가입</h1>
 	<form method="post" action="${ctx}/addMember.do" enctype="multipart/form-data" >
+	<label for="formFile" class="form-label">사원 이미지 등록 </label>
+			<input class="fv" type="text" name="photoFile" size="15" />
+			 <input
+				type="file" class="form-control" onchange="update()" id="formFile"
+				type="file" name="uploadFile" accept=" .png">
 		<table class="table table-bordered">
 			<tr>
 				<td>아이디</td>
@@ -48,12 +53,6 @@ input[type=submit], input[type=reset] {
 				<td><input class="col-5" type="text" name="name" id="name" required/></td>
 			</tr>
 			<tr>
-				<td form="formFile" class="form-label">이미지 등록 </td>
-			<input class="fv" type="text" name="name" size="15" />
-			 <input
-				type="file" class="form-control" onchange="update()" id="formFile"
-				type="file" name="uploadFile" accept=" .png"></td>
-		    </tr>
 				<td>성별</td>
 				<td><input class="col-5" type="text" name="gender" id="gender" required/></td>
 			</tr>
@@ -87,6 +86,7 @@ input[type=submit], input[type=reset] {
 			</tr>
 			<tr>
 				<td colspan="2" id="btns">
+				
 					<input type="button" value="가입" class="col-3 btn btn-primary" onclick="validCheck(form)" /> 
 					<input type="reset" value="취소" class="col-3 btn btn-warning" /></td>
 			</tr>

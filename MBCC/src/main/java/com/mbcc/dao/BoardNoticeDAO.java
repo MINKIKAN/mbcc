@@ -15,7 +15,7 @@ public class BoardNoticeDAO {
 	private BoardNoticeDAO () {}
 	private static BoardNoticeDAO dao= new BoardNoticeDAO();
 	
-	public BoardNoticeDAO getInstance() {
+	public static BoardNoticeDAO getInstance() {
 		return dao;
 	}
 	

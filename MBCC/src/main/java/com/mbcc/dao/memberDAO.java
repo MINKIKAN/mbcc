@@ -15,7 +15,7 @@ public class memberDAO {
 	}
    
    public String userLogin(Member member) {
-	   System.out.println("test");
+	   
 	   SqlSession session= MybatisConfig.getInstance().openSession(true);
 	   String memId=session.selectOne("mapper.member.userLogin", member);
 	   session.close();
@@ -65,13 +65,12 @@ public class memberDAO {
 	   return cnt;
    }
    
-   public boolean confirm(String id){
-	   SqlSession session= MybatisConfig.getInstance().openSession(true);
-	   String memId=session.selectOne("mapper.member.adminUserUpdate", id);
-	   if (memId.equals("ADMIN")) {
-		return true;
-	}
-	   return false;
-	   
+   public String confirm(String id) {
+	    SqlSession session = MybatisConfig.getInstance().openSession(true);
+	    int count = session.selectOne("mapper.member.isAdminOrUser", id);
+	    if (count>0) {
+			return "true";
+		}
+	    return "false";   
   }
 }

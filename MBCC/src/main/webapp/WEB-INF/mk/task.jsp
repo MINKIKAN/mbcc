@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<style>
+.btn-primary:focus, .btn-primary:hover { background-position:0 0; background:#FFF; color:#0d6efd; transition:all 0.3s; }
+</style>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 	<c:set var="matchedMemNum" value="0" />

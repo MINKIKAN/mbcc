@@ -21,7 +21,7 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-people"></i></div>
                             Drive
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('board.do')">
+                        <a class="nav-link" href="#" onclick="asyncMovePage('notice.do')">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Notice
                         </a>
@@ -51,3 +51,4 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
+            
