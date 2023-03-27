@@ -94,7 +94,6 @@ function submitApprovalForm(btnId) {
 		    type: 'POST',
 		    data: $('#vacationForm').serialize(),
 		    success: function(response) {
-		        console.log(formData);
 		        asyncMovePage('approval.do');
 		    },
 		    error: function(xhr, status, error) {

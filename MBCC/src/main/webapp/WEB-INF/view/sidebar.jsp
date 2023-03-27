@@ -17,10 +17,6 @@
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-car-side"></i></div>
                             Task
                         </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('drive.do')">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-people"></i></div>
-                            Drive
-                        </a>
                         <a class="nav-link" href="#" onclick="asyncMovePage('notice.do')">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Notice
@@ -36,10 +32,6 @@
                         <a class="nav-link" href="#" onclick="asyncMovePage('calendar.do')">
                             <div class="sb-nav-link-icon"><i class="fa-regular fa-comet"></i></div>
                             Calendar
-                        </a>
-                        <a class="nav-link" href="#" onclick="asyncMovePage('meeting.do')">
-                            <div class="sb-nav-link-icon"><i class="fa-regular fa-comet"></i></div>
-                            Meeting
                         </a>
                         
                         

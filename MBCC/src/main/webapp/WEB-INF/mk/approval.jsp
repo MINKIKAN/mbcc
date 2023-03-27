@@ -3,22 +3,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
     <div class="approval-grid">
-		<div class="approval-main-top">
-			<h2 id="approval-title">결재</h2>
-			<div class="">
-				<fieldset class="approval-main-top-mode-select">
-				  <label>
-				    <input type="radio" id="contact-view-mode" name="contact" value="view-mode" checked/>
-				    <span>문서 확인</span>
-				  </label>
-				  
-				  <label>
-				    <input type="radio" id="contact-write-mode" name="contact" value="write-mode"/>
-				    <span>새 기안</span>
-				  </label>
-				</fieldset>
-			</div>
-		</div>
+  <div class="approval-main-top">
+    <h2 id="approval-title">결재</h2>
+    <div class="">
+      <fieldset class="approval-main-top-mode-select">
+        <label>
+          <input type="radio" id="contact-view-mode" name="contact" value="view-mode" checked/>
+          <span>문서 확인</span>
+        </label>
+        
+        <label>
+          <input type="radio" id="contact-write-mode" name="contact" value="write-mode"/>
+          <span>새 기안</span>
+        </label>
+      </fieldset>
+    </div>
+  </div>
 		
 		<div class="approval-main-side">
 			<div class="approval-main-side-header">
@@ -91,150 +91,18 @@
 	</div>
 
 <script>
-  const viewModeElement = document.getElementById("contact-view-mode");
-  const writeModeElement = document.getElementById("contact-write-mode");
+const viewModeElement = document.getElementById("contact-view-mode");
+const writeModeElement = document.getElementById("contact-write-mode");
 
-  viewModeElement.addEvenalistener("change", function() {
-    document.getElementById("approval-view-write-template").style.display = "none";
-    document.getElementById("approval-view-view-mode").style.display = "block";
-  });
+viewModeElement.addEventListener("change", function() {
+  document.getElementById("approval-view-write-template").style.display = "none";
+  document.getElementById("approval-view-view-mode").style.display = "block";
+});
 
-  writeModeElement.addEvenalistener("change", function() {
-    document.getElementById("approval-view-write-template").style.display = "block";
-    document.getElementById("approval-view-view-mode").style.display = "none";
-  });
-
- /*  function showAlistContents(data) {
-	  var boardTitle = data.querySelector('.approval-board-title').textContent;
-	  var approvalStatus = data.querySelector('.approval-status').value;
-	  var hiddenInputs = data.querySelectorAll('input[type="hidden"]');
-
-	  var inputData = {
-	    boardTitle: boardTitle,
-	    approvalStatus: approvalStatus
-	  };
-
-	  hiddenInputs.forEach(function (input) {
-	    inputData[input.getAttribute('class')] = input.value;
-	  });
-
-	  var centerRight = document.querySelector('.approval-main-center-right');
-	  centerRight.innerHTML = '';
-
-	  var frame = document.createElement('div');
-	  frame.classList.add('approval-main-center-right-frame');
-
-	  var frameTop = document.createElement('div');
-	  frameTop.classList.add('approval-main-center-right-frame-top');
-
-	  // Create header div
-	  var headerDiv = document.createElement('div');
-	  headerDiv.classList.add('view-contents-header');
-
-	  // Create title div
-	  var titleDiv = document.createElement('div');
-	  titleDiv.classList.add('detail-frametop-board-title');
-	  titleDiv.textContent = inputData['boardTitle'];
-	  headerDiv.appendChild(titleDiv);
-
-	  // Create approvalStatus select box
-	  var approvalStatusSelect = document.createElement('select');
-	  approvalStatusSelect.classList.add('detail-frametop-board-approvalStatus');
-
-	  // Create options
-	  var options = [
-	    { text: '요청됨', value: 'REQUESTED' },
-	    { text: '승인됨', value: 'APPROVED' },
-	    { text: '반려됨', value: 'REJECTED' }
-	  ];
-	
-	  options.forEach(function (optionObj) {
-	    var option = document.createElement('option');
-	    option.textContent = optionObj.text;
-	    option.value = optionObj.value;
-	    if (optionObj.value === inputData['approvalStatus']) {
-	      option.selected = true;
-	    }
-	    approvalStatusSelect.appendChild(option);
-	  });
-	
-	  headerDiv.appendChild(approvalStatusSelect);
-	  
-	  // Create hidden input for approval-board-id
-	  var hiddenBoardIdInput = document.createElement('input');
-	  hiddenBoardIdInput.type = 'hidden';
-	  hiddenBoardIdInput.setAttribute('class', 'approval-board-id');
-	  hiddenBoardIdInput.value = inputData['approval-board-id'];
-	  headerDiv.appendChild(hiddenBoardIdInput);
-	  
-	  var horizontalLine = document.createElement('hr');
-	  headerDiv.appendChild(horizontalLine);
-	  
-
-	  // Append headerDiv to frameTop
-	  frameTop.appendChild(headerDiv);
-
-	  // Create header-wrapper div
-	  var headerWrapper = document.createElement('div');
-	  headerWrapper.classList.add('header-wrapper');
-	  
-	  var inputFields = [
-	    { key: 'approval-create-date', label: '작성일' },
-	    { key: 'approval-mem-num', label: '등록자' },
-	    { key: 'approval-requestor-mem-num', label: '요청자' },
-	    { key: 'approval-info', label: '참조자' }
-	  ];
-
-	  // Move the inputFields content creation inside the headerWrapper
-	  inputFields.forEach(function (field) {
-	    var div = document.createElement('div');
-	    div.classList.add('detail-frametop-board-info');
-	    div.textContent = field.label + ": " + inputData[field.key];
-	    headerWrapper.appendChild(div);
-	  });
-
-	  // Append headerWrapper to frameTop
-	  frameTop.appendChild(headerWrapper);
-
-	  frame.appendChild(frameTop);
-
-	  var frameBottom = document.createElement('div');
-	  frameBottom.classList.add('approval-main-center-right-frame-bottom');
-	  
-	  // ss
-
-	  var contentDiv = document.createElement('div');
-	  contentDiv.textContent = inputData['approval-board-content'];
-	  frameBottom.appendChild(contentDiv);
-
-	  var buttonDiv = document.createElement('div');
-	  buttonDiv.classList.add('approval-main-center-right-frame-bottom-delmodBtn-area');
-
-	  var editButton = document.createElement('button');
-	  editButton.classList.add('btn', 'btn-primary');
-	  editButton.setAttribute('id', 'approval-detail-modify-button');
-	  editButton.textContent = '수정';
-	  editButton.addEventListener('click', function () {
-		  // Edit button click handler
-	  });
-
-	  var deleteButton = document.createElement('button');
-	  deleteButton.classList.add('btn', 'btn-danger');
-	  deleteButton.setAttribute('id', 'approval-detail-delete-button');
-	  deleteButton.textContent = '삭제';
-	  deleteButton.addEventListener('click', function () {
-	  // Delete button click handler
-	  });
-
-	  buttonDiv.appendChild(editButton);
-	  buttonDiv.appendChild(deleteButton);
-	  frameBottom.appendChild(buttonDiv);
-	  //ss
-
-	  frame.appendChild(frameBottom);
-
-	  centerRight.appendChild(frame);
-	} */
+writeModeElement.addEventListener("change", function() {
+  document.getElementById("approval-view-write-template").style.display = "block";
+  document.getElementById("approval-view-view-mode").style.display = "none";
+});
 </script>
 
 <style>
