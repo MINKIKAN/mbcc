@@ -27,6 +27,8 @@
 }
 .main-template-notice-section {
 	grid-area:not;
+	padding: 10px;
+    height: 100%;
 	border-right:1px solid #dee2e6;
 	border-bottom:1px solid #dee2e6;
 }
@@ -45,6 +47,7 @@
     height: 100%;
     overflow: auto; 
 }
+
 .main-template-calendar-section::-webkit-scrollbar {
     width: 0px; 
 }

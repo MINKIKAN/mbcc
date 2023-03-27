@@ -50,7 +50,7 @@
     </select>
     
     <select id="isAdminOrUser" resultType="String">
-    SELECT COUNT(*) FROM member WHERE mem_id = #{mem_id} AND role IN ('ADMIN', 'USER')
+    SELECT * FROM member WHERE mem_id = #{mem_id} AND role IN ("ADMIN")
 </select>
     	
     <insert id="userInsert" parameterType="member">

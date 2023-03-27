@@ -2,7 +2,8 @@
 
 html, body {
   height: 100%;
-  background: #ffffff;
+  background: #0A0A0A;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #container {
@@ -14,27 +15,48 @@ html, body {
 }
 
 #loginBox {
-  width: 50%;
-  height: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	justify-content:center;
+	text-align:left;
+  max-width:600px;
+  min-height: 600px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #0A0A0A;
+  position: relative;
+}
+#loginBox .logo {
+	max-width:60px;
+	object-fit:contain;
 }
 .input-form-box {
   border: 0px solid #ff0000;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 20px;
+  gap: 10px 0;
 }
-.input-form-box > span {
-  display: block;
-  text-align: left;
-  padding-top: 5px;
-  min-width: 65px;
+.input-form-box label {
+	color:#FFF;
 }
 .button-login-box {
   margin: 30px 0;
 }
+.button-login-box #login {
+	min-height: 60px;
+	border-radius:15px;
+	transition:all 0.3s;
+}
+.button-login-box #login:hover {
+	background: #FFF;
+	color:#0d6efd;
+	transition:all 0.3s;
+}
+
 #loginBoxTitle {
-  color:#000000;
+  color:#FFF;
   font-weight: bold;
   font-size: 60px;
   text-transform: uppercase;
@@ -52,6 +74,9 @@ html, body {
      padding: 3px 5px;
     margin: 20px 0px;
 }
+
+#insertmember,
+#findPw {  }
 
 a {
   text-decoration: none;

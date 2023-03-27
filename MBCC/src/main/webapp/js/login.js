@@ -9,7 +9,8 @@ $("#login").click(function() {
 			url:ctx +"/loginCheck.do",
 			data: {
 				id: $("#id").val(),
-				pw: $("#pw").val()
+				pw: $("#pw").val(),
+				memNum:$("num").val() 
 			},
 			success: function(data) {
 				if (data == "null") {

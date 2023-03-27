@@ -16,7 +16,7 @@
 	</resultMap>
 
 	<select id="getAllNotice" resultMap="BoardCommon">
-		Select * FROM board_common ;
+		Select * FROM board_common WHERE board_type = 'FREE' ;
 	</select>
 
 	<insert id="insertNotice" parameterType="map" useGeneratedKeys="true" keyProperty="id" keyColumn="board_id">
