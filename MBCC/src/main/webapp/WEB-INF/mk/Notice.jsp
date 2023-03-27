@@ -15,6 +15,12 @@
 	        <c:set var="matchedMemName" value="${member.memName}" />
 	    </c:if>
 	</c:forEach>
+	<c:set var="matchedMemRole" value="" />
+	<c:forEach items="${mlist}" var="member">
+	    <c:if test="${member.memId == sessionScope.id}">
+	        <c:set var="matchedMemRole" value="${member.role}" />
+	    </c:if>
+	</c:forEach>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +76,7 @@
 </style>
 <body>
 <h1>공지사항</h1>
+<%-- <input type="text" id="memNum" name="memNum" value="${matchedMemRole}"> --%>
 <div class="write" > 
 <button id="task-addBtn" type="button" data-toggle="modal" data-target="#taskModal" style="width:8%">글쓰기</button>
 </div>
