@@ -3,30 +3,26 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<div class="tabmenu out-tabmenu">
-  <ul>
-    <li id="tab1" class="btnCon"> 
-      <input type="radio" checked name="tabmenu" id="tabmenu1">
-      <label for="tabmenu1">휴가</label>
-      <div class="tabCon" >
-		<h1>this is for vacation approval form</h1> 
-		<%@ include file="approvaltemplatevacation.jsp" %>     
-      </div>
-    </li>
-    <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
-      <label for="tabmenu2">야간근무 신청</label>
-      <div class="tabCon" >
-      	<h1>this is for overtime approval form</h1>
-      </div>
-    </li>    
-    <li id="tab3" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu3">
-      <label for="tabmenu3">출퇴근 시간 변경</label>
-      <div class="tabCon" >
-      	<h1>this is for work-hour-change approval form</h1>
-      </div>
-    </li>
-  </ul>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Approval</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">휴가<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">야간근무 신청</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">출퇴근 시간 변경</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <style>
 /* .approval-write-form-accordion-body{
 	height:80%;

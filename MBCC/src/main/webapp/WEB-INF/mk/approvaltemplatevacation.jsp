@@ -14,51 +14,68 @@
 </c:forEach>
 
 <!-- 휴가 결재 템플릿 -->
-<div class="modal fade" id="vacationModal" tabindex="-1" role="dialog" aria-labelledby="vacationModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="vacationModalLabel">휴가원 작성</h5>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="name">${matchedMemName}</label>
-          </div>
-          <div class="form-group">
-			  <label for="startdate">시작일</label>
-			  <input type="date" class="form-control" id="startdate" placeholder="Enter the startdate" onchange="calculateTimeoff()">
-			</div>
-			<div class="form-group">
-			  <label for="enddate">복귀일</label>
-			  <input type="date" class="form-control" id="enddate" placeholder="Enter the enddate" onchange="calculateTimeoff()">
-			</div>
-          <div class="form-group">
-          	<label for="name">차감시간</label>
-          	<p id="vacation-timeoff"></p>
-          </div>
-          <div class="form-group">
-            <label for="name">제출사유</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your reason">
-          </div>
-        </form>
-        <input type="hidden" name="app-boardType" value="APPROVAL">
-        <input type="hidden" name="app-boardName" value="MEMBER${matchedMemNum}VACATION">
-        <input type="hidden" name="app-boardContent" value="MEMBER${matchedMemNum}VACATION">
-        <input type="hidden" name="app-memNum" value="${matchedMemNum}">
-        <input type="hidden" name="app-fileId" value="${vo.fileId}">
-        <input type="hidden" name="app-requestorMemNum" value="${matchedMemNum}">
-        <input type="hidden" name="app-approverMemNum" value="">
-        <input type="hidden" name="app-approvalType" value="VACTION">
-        <input type="hidden" name="app-approvalStatus" value="REQUESTED">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
+<div class="vacation-form">
+  <form>
+    <div class="form-group">
+      <label for="startdate">휴가 시작일</label>
+      <input type="date" class="form-control" id="startdate" name="startdate" required>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="enddate">휴가 복귀일</label>
+      <input type="date" class="form-control" id="enddate" name="enddate" required>
+    </div>
+    <div class="form-group">
+      <label for="timeoff">연차 차감시간</label>
+      <input type="number" class="form-control" id="timeoff" name="timeoff" required>
+    </div>
+    <div class="form-group">
+      <label for="reason">휴가기안 작성 사유</label>
+      <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">제출</button>
+  </form>
 </div>
+<%-- <div class="card">
+  <div class="card-header">
+    <h5>휴가원 작성</h5>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <label for="name">${matchedMemName}</label>
+      </div>
+      <div class="form-group">
+        <label for="startdate">시작일</label>
+        <input type="date" id="startdate" placeholder="Enter the startdate" onchange="calculateTimeoff()">
+      </div>
+      <div class="form-group">
+        <label for="enddate">복귀일</label>
+        <input type="date" id="enddate" placeholder="Enter the enddate" onchange="calculateTimeoff()">
+      </div>
+      <div class="form-group">
+        <label for="name">차감시간</label>
+        <p id="vacation-timeoff"></p>
+      </div>
+      <div class="form-group">
+        <label for="name">제출사유</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your reason">
+      </div>
+    </form>
+    <input type="hidden" name="app-boardType" value="APPROVAL">
+    <input type="hidden" name="app-boardName" value="MEMBER${matchedMemNum}VACATION">
+    <input type="hidden" name="app-boardContent" value="MEMBER${matchedMemNum}VACATION">
+    <input type="hidden" name="app-memNum" value="${matchedMemNum}">
+    <input type="hidden" name="app-fileId" value="${vo.fileId}">
+    <input type="hidden" name="app-requestorMemNum" value="${matchedMemNum}">
+    <input type="hidden" name="app-approverMemNum" value="">
+    <input type="hidden" name="app-approvalType" value="VACTION">
+    <input type="hidden" name="app-approvalStatus" value="REQUESTED">
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary">제출</button>
+  </div>
+</div> --%>
+
 
 <script>
 	function calculateTimeoff() {
