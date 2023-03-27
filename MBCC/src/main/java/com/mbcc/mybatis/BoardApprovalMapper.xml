@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.boardApproval">
+
+	<resultMap id="boardApproval" type="com.mbcc.vo.BoardApproval">
+        <!-- BoardCommon fields -->
+        <id property="boardId" column="board_id" />
+        <result property="boardType" column="board_type" />
+        <result property="boardTitle" column="board_title" />
+        <result property="boardContent" column="board_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <result property="memNum" column="mem_num" />
+        <result property="fileId" column="file_id" />
+        
+        <!-- BoardApproval fields -->
+        <result property="requestorMemNum" column="requestor_mem_num" />
+        <result property="approverMemNum" column="approver_mem_num" />
+        <result property="approvalType" column="approval_type" />
+        <result property="approvalStatus" column="approval_status" />
+        <result property="approvalDate" column="approval_date" />
+        <result property="dueDate" column="due_date" />
+        <result property="approvalInfo" column="approval_info" />
+    </resultMap>
+  
+    <select id="getAllApproval" resultMap="boardApproval">
+        SELECT bc.*, ba.requestor_mem_num, ba.approver_mem_num, ba.approval_type, ba.approval_status, ba.approval_date, ba.due_date, ba.approval_info
+        FROM board_common bc
+        JOIN board_approval ba ON bc.board_id = ba.board_id
+    </select>
+	
+	<insert id="insertBoardCommon" parameterType="map" useGeneratedKeys="true" keyProperty="id" keyColumn="board_id">
+	  INSERT INTO board_common (board_type, board_title, board_content, create_date, update_date, mem_num, file_id)
+	  VALUES (#{boardType}, #{boardTitle}, #{boardContent}, #{createDate}, #{updateDate}, #{memNum}, #{fileId});
+	</insert>
+	
+	<insert id="insertBoardApproval" parameterType="map">
+	  INSERT INTO board_approval (board_id, requestor_mem_num, approver_mem_num, approval_type, approval_status, approval_date, due_date, approval_info)
+	  VALUES (LAST_INSERT_ID(), #{requestorMemNum}, #{approverMemNum}, #{approvalType}, #{approvalStatus}, #{approvalDate}, #{dueDate}, #{approvalInfo});
+	</insert>
+	
+	<update id="updateBoardApprovalStatus" parameterType="map">
+      UPDATE board_approval SET approval_status = #{approvalStatus} WHERE board_id = #{boardId}
+    </update>
+    
+	<delete id="deleteBoardApprovalByBoardId">
+      DELETE FROM board_approval WHERE board_id = #{boardId}
+	</delete>
+
+	<delete id="deleteBoardCommonByBoardId">
+      DELETE FROM board_common WHERE board_id = #{boardId}
+	</delete>
+    
+</mapper>

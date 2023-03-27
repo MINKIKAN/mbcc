@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
     <c:set var="ctx" value="${pageContext.request.contextPath}"/> 
-    <c:forEach items="${mlist}" var="member">
+    <c:forEach items="${list}" var="member">
 	    <c:if test="${member.memId == sessionScope.id}">
 	        <c:set var="matchedMemNum" value="${member.memNum}" />
 	    </c:if>
@@ -27,6 +27,7 @@
 	
 </style>
 <body>
+<input type="text" id="memNum" name="memNum" value="${matchedMemNum}">
 	<h1> 사원 목록 </h1>
 	<table class="table table-striped table-hover">
 	

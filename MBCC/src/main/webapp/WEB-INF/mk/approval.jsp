@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
     <div class="approval-grid">
 		<div class="approval-main-top">
@@ -7,13 +8,13 @@
 			<div class="">
 				<fieldset class="approval-main-top-mode-select">
 				  <label>
-				    <input type="radio" id="contact" name="contact" value="write-mode" checked />
-				    <span>새 기안</span>
-				  </label>
-				
-				  <label>
-				    <input type="radio" id="contact" name="contact" value="view-mode" />
+				    <input type="radio" id="contact-view-mode" name="contact" value="view-mode" checked/>
 				    <span>문서 확인</span>
+				  </label>
+				  
+				  <label>
+				    <input type="radio" id="contact-write-mode" name="contact" value="write-mode"/>
+				    <span>새 기안</span>
 				  </label>
 				</fieldset>
 			</div>
@@ -22,7 +23,7 @@
 		<div class="approval-main-side">
 			<div class="approval-main-side-header">
 				<div class="approval-main-side-header-content approval-main-side-header-content-sort-todo" style="width:100%;" onclick="sideHeaderContentClickTodo()">요청된 문서</div>
-				<div class="approval-main-side-header-content approval-main-side-header-content-sort-inprogress" style="width:100%;" onclick="sideHeaderContentClickInprogress()">승인된 문서</div>
+				<div class="approval-main-side-header-content approval-main-side-header-content-sort-inapprovalStatus" style="width:100%;" onclick="sideHeaderContentClickInapprovalStatus()">승인된 문서</div>
 				<div class="approval-main-side-header-content approval-main-side-header-content-sort-done" style="width:100%;" onclick="sideHeaderContentClickDone()">반려된 문서</div>
 			</div>
 			<hr>
@@ -37,9 +38,48 @@
 		</div>
 		
 		<div class="approval-main-center-left">
-		    <!-- <div class="approval-main-center-left-tlist-section" onclick="showTlistContents(this)">
-		    	<div class="approval-main-center-left-tlist-section-component"></div>
-		    </div> -->   	 
+			<c:forEach var="vo" items="${alist}" varStatus="vs">
+		    <div class="approval-main-center-left-alist-section" onclick="showAlistContents(this)">
+		    	<div class="approval-main-center-left-alist-section-component">
+		    	  <h6 class="approval-board-title">${vo.boardTitle}</h6>
+		    	  <h6>
+		    	  담당자 : 
+		    	  	<c:forEach var="m" items="${mlist}">
+	                    <c:if test="${m.memNum == vo.requestorMemNum}">
+	                        ${m.memName}&nbsp;&nbsp;
+	                    </c:if>
+	                </c:forEach>
+		    	  </h6>
+		    	</div>
+		    	  <h6 class="approval-main-center-left-alist-section-component
+					    <c:choose>
+					        <c:when test="${vo.approvalStatus == 'REQUESTED'}">approval-status-requested</c:when>
+					        <c:when test="${vo.approvalStatus == 'APPROVED'}">approval-status-approved</c:when>
+					        <c:when test="${vo.approvalStatus == 'REJECTED'}">approval-status-rejected</c:when>
+					    </c:choose>
+				  ">
+					<c:choose>
+				        <c:when test="${vo.approvalStatus == 'REQUESTED'}">요청됨&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+				        <c:when test="${vo.approvalStatus == 'APPROVED'}">승인됨&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+				        <c:when test="${vo.approvalStatus == 'REJECTED'}">반려됨&nbsp;&nbsp;<span class="badge bg-secondary"></span></c:when>
+				    </c:choose>
+				  </h6>
+				  <input type="hidden" class="approval-board-id" value="${vo.boardId}">
+			      <input type="hidden" class="approval-board-type" value="${vo.boardType}">
+			      <input type="hidden" class="approval-board-content" value="${vo.boardContent}">
+			      <input type="hidden" class="approval-create-date" value="${vo.createDate}">
+			      <input type="hidden" class="approval-update-date" value="${vo.updateDate}">
+			      <input type="hidden" class="approval-mem-num" value="${vo.memNum}">
+			      <input type="hidden" class="approval-file-id" value="${vo.fileId}">
+			      <input type="hidden" class="approval-requestor-mem-num" value="${vo.requestorMemNum}">
+			      <input type="hidden" class="approval-approver-mem-num" value="${vo.approverMemNum}">
+			      <input type="hidden" class="approval-type" value="${vo.approvalType}">
+			      <input type="hidden" class="approval-status" value="${vo.approvalStatus}">
+			      <input type="hidden" class="approval-date" value="${vo.approvalDate}">
+			      <input type="hidden" class="dueDate" value="${vo.dueDate}">
+			      <input type="hidden" class="approval-info" value="${vo.approvalInfo}">
+	    	</div>   	 
+		  	</c:forEach>
 		</div>
 		
 		<div class="approval-main-center-right">
@@ -49,18 +89,152 @@
 		</div>
 		
 	</div>
-<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vacationModal">
-  새 기안
-</button>
-<%@ include file="approvaltemplate.jsp" %> --%>
 
 <script>
-  $(document).ready(function() {
-	  $(document).on('change','.approval-main-top-mode-select', function() {
-		  var radioValue=document.querySelector('#contact').value;
-		  alert(radioValue);
-	  })
-  })
+  const viewModeElement = document.getElementById("contact-view-mode");
+  const writeModeElement = document.getElementById("contact-write-mode");
+
+  viewModeElement.addEvenalistener("change", function() {
+    document.getElementById("approval-view-write-template").style.display = "none";
+    document.getElementById("approval-view-view-mode").style.display = "block";
+  });
+
+  writeModeElement.addEvenalistener("change", function() {
+    document.getElementById("approval-view-write-template").style.display = "block";
+    document.getElementById("approval-view-view-mode").style.display = "none";
+  });
+
+ /*  function showAlistContents(data) {
+	  var boardTitle = data.querySelector('.approval-board-title').textContent;
+	  var approvalStatus = data.querySelector('.approval-status').value;
+	  var hiddenInputs = data.querySelectorAll('input[type="hidden"]');
+
+	  var inputData = {
+	    boardTitle: boardTitle,
+	    approvalStatus: approvalStatus
+	  };
+
+	  hiddenInputs.forEach(function (input) {
+	    inputData[input.getAttribute('class')] = input.value;
+	  });
+
+	  var centerRight = document.querySelector('.approval-main-center-right');
+	  centerRight.innerHTML = '';
+
+	  var frame = document.createElement('div');
+	  frame.classList.add('approval-main-center-right-frame');
+
+	  var frameTop = document.createElement('div');
+	  frameTop.classList.add('approval-main-center-right-frame-top');
+
+	  // Create header div
+	  var headerDiv = document.createElement('div');
+	  headerDiv.classList.add('view-contents-header');
+
+	  // Create title div
+	  var titleDiv = document.createElement('div');
+	  titleDiv.classList.add('detail-frametop-board-title');
+	  titleDiv.textContent = inputData['boardTitle'];
+	  headerDiv.appendChild(titleDiv);
+
+	  // Create approvalStatus select box
+	  var approvalStatusSelect = document.createElement('select');
+	  approvalStatusSelect.classList.add('detail-frametop-board-approvalStatus');
+
+	  // Create options
+	  var options = [
+	    { text: '요청됨', value: 'REQUESTED' },
+	    { text: '승인됨', value: 'APPROVED' },
+	    { text: '반려됨', value: 'REJECTED' }
+	  ];
+	
+	  options.forEach(function (optionObj) {
+	    var option = document.createElement('option');
+	    option.textContent = optionObj.text;
+	    option.value = optionObj.value;
+	    if (optionObj.value === inputData['approvalStatus']) {
+	      option.selected = true;
+	    }
+	    approvalStatusSelect.appendChild(option);
+	  });
+	
+	  headerDiv.appendChild(approvalStatusSelect);
+	  
+	  // Create hidden input for approval-board-id
+	  var hiddenBoardIdInput = document.createElement('input');
+	  hiddenBoardIdInput.type = 'hidden';
+	  hiddenBoardIdInput.setAttribute('class', 'approval-board-id');
+	  hiddenBoardIdInput.value = inputData['approval-board-id'];
+	  headerDiv.appendChild(hiddenBoardIdInput);
+	  
+	  var horizontalLine = document.createElement('hr');
+	  headerDiv.appendChild(horizontalLine);
+	  
+
+	  // Append headerDiv to frameTop
+	  frameTop.appendChild(headerDiv);
+
+	  // Create header-wrapper div
+	  var headerWrapper = document.createElement('div');
+	  headerWrapper.classList.add('header-wrapper');
+	  
+	  var inputFields = [
+	    { key: 'approval-create-date', label: '작성일' },
+	    { key: 'approval-mem-num', label: '등록자' },
+	    { key: 'approval-requestor-mem-num', label: '요청자' },
+	    { key: 'approval-info', label: '참조자' }
+	  ];
+
+	  // Move the inputFields content creation inside the headerWrapper
+	  inputFields.forEach(function (field) {
+	    var div = document.createElement('div');
+	    div.classList.add('detail-frametop-board-info');
+	    div.textContent = field.label + ": " + inputData[field.key];
+	    headerWrapper.appendChild(div);
+	  });
+
+	  // Append headerWrapper to frameTop
+	  frameTop.appendChild(headerWrapper);
+
+	  frame.appendChild(frameTop);
+
+	  var frameBottom = document.createElement('div');
+	  frameBottom.classList.add('approval-main-center-right-frame-bottom');
+	  
+	  // ss
+
+	  var contentDiv = document.createElement('div');
+	  contentDiv.textContent = inputData['approval-board-content'];
+	  frameBottom.appendChild(contentDiv);
+
+	  var buttonDiv = document.createElement('div');
+	  buttonDiv.classList.add('approval-main-center-right-frame-bottom-delmodBtn-area');
+
+	  var editButton = document.createElement('button');
+	  editButton.classList.add('btn', 'btn-primary');
+	  editButton.setAttribute('id', 'approval-detail-modify-button');
+	  editButton.textContent = '수정';
+	  editButton.addEventListener('click', function () {
+		  // Edit button click handler
+	  });
+
+	  var deleteButton = document.createElement('button');
+	  deleteButton.classList.add('btn', 'btn-danger');
+	  deleteButton.setAttribute('id', 'approval-detail-delete-button');
+	  deleteButton.textContent = '삭제';
+	  deleteButton.addEventListener('click', function () {
+	  // Delete button click handler
+	  });
+
+	  buttonDiv.appendChild(editButton);
+	  buttonDiv.appendChild(deleteButton);
+	  frameBottom.appendChild(buttonDiv);
+	  //ss
+
+	  frame.appendChild(frameBottom);
+
+	  centerRight.appendChild(frame);
+	} */
 </script>
 
 <style>
@@ -138,7 +312,7 @@ body {
     background: transparent; /* 스크롤바 트랙을 투명하게 만듭니다. */
 }
 
-.approval-main-center-left-tlist-section {
+.approval-main-center-left-alist-section {
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -148,7 +322,7 @@ body {
     cursor: pointer;
 }
 
-.approval-main-center-left-tlist-section:hover {
+.approval-main-center-left-alist-section:hover {
     background-color: #f4f6f9;
 }
 
@@ -246,5 +420,24 @@ fieldset {
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+.approval-requestor-member-name {
+	font-size:12px;
+}
+
+.approval-status-to-do {
+    color: limegreen;
+    font-size:11px;
+}
+
+.approval-status-in-approvalStatus {
+    color: blue;
+    font-size:12px;
+}
+
+.approval-status-done {
+    color: gray;
+    font-size:12px;
 }
 </style>

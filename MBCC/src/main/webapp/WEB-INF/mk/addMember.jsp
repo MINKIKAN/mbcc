@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <style>
+#add-Member-Title {
+	color:white;
+}
 tr :last-child {
 	text-align: left;
 }
@@ -22,6 +25,112 @@ input[type=submit], input[type=reset] {
 #btns {
 	text-align: center;
 }
+
+/* Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  background-color: #f7f7f7;
+  font-family: 'Noto Sans KR', sans-serif;
+} */
+html, body {
+  height: 100%;
+  background: #0A0A0A;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Form Styles */
+
+form {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"],
+input[type="reset"],
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover {
+  background-color: #0062cc;
+}
+
+button {
+  background-color: #fff;
+  color: #0d6efd;
+  border: 1px solid #0d6efd;
+}
+
+button:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font: Roboto;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
 </style>
 <html>
 
@@ -31,7 +140,7 @@ input[type=submit], input[type=reset] {
 
 <body>
 <body>
-	<h1 class="py-3">회원 가입</h1>
+	<h1 id="add-Member-Title"class="py-3">회원 가입</h1>
 	<form method="post" action="${ctx}/addMember.do" enctype="multipart/form-data" >
 	<label for="formFile" class="form-label">사원 이미지 등록 </label>
 			<input class="fv" type="text" name="photoFile" size="15" />
@@ -87,13 +196,18 @@ input[type=submit], input[type=reset] {
 			<tr>
 				<td colspan="2" id="btns">
 				
-					<input type="button" value="가입" class="col-3 btn btn-primary" onclick="validCheck(form)" /> 
+					<!-- <input type="button" id="signup-btn" value="가입" class="col-3 btn btn-primary" onclick="validCheck(form)" /> --> 
+					<button type="button" id="signup-btn" value="가입" class="col-3 btn btn-primary" onclick="validCheck(form)" >가입</button>
 					<input type="reset" value="취소" class="col-3 btn btn-warning" /></td>
 			</tr>
 		</table>
 	</form>
 	
+	
+	
+	
 
 </body>
 </html>
+
 

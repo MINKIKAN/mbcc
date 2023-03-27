@@ -3,26 +3,108 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Approval</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">휴가<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">야간근무 신청</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">출퇴근 시간 변경</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div id="approval-view-write-template"style="display:none;">
+	<div id="approval-write-template-top">
+		<div class="">
+				<fieldset class="approval-write-template-top-mode-select">
+				  <label>
+				    <input type="radio" id="approval-form-selector" name="approval-form-selector" value="VACATION" checked />
+				    <span>휴가 신청</span>
+				  </label>
+				
+				  <label>
+				    <input type="radio" id="approval-form-selector" name="approval-form-selector" value="OVERTIME" />
+				    <span>야간근무 신청</span>
+				  </label>
+				  
+				  <label>
+				    <input type="radio" id="approval-form-selector" name="approval-form-selector" value="WORK_HOUR_CHANGE" />
+				    <span>출퇴근 시간 변경</span>
+				  </label>
+				</fieldset>
+			</div>
+	</div>
+	<div id="approval-write-template-bottom">
+		<div id="VACATION-form">
+		<%@ include file="approvaltemplatevacation.jsp" %>
+		</div>
+		
+		<div id="OVERTIME-form" style="display:none;">
+		<%@ include file="approvaltemplateovertime.jsp" %>
+		</div>
+		
+		<div id="WORK_HOUR_CHANGE-form" style="display:none;">
+		<%@ include file="approvaltemplateworkhourchange.jsp" %>
+		</div>
+	</div>
+</div>
 
+<div id="approval-view-view-mode">
+	<h1>viewMode</h1>
+</div>
+
+<script>
+$(document).ready(function(){
+  $('input[type=radio][name=approval-form-selector]').off('change');
+  $('input[type=radio][name=approval-form-selector]').on('change', function() {
+    if (this.value == 'VACATION') {
+      $('#VACATION-form').show();
+      $('#OVERTIME-form').hide();
+      $('#WORK_HOUR_CHANGE-form').hide();
+    }
+    else if (this.value == 'OVERTIME') {
+    	$('#VACATION-form').hide();
+        $('#OVERTIME-form').show();
+        $('#WORK_HOUR_CHANGE-form').hide();
+    }
+    else if (this.value == 'WORK_HOUR_CHANGE') {
+    	$('#VACATION-form').hide();
+        $('#OVERTIME-form').hide();
+        $('#WORK_HOUR_CHANGE-form').show();
+    }
+  });
+});
+
+function submitApprovalForm(btnId) {
+	  
+	  if(btnId=="vacation-btn") {
+		  const vacationInfoStr='휴가시작일='+document.getElementById("startdate").value+'&휴가복귀일='+document.getElementById("enddate").value +'&연차차감시간='+document.getElementById("vacation-timeoff").innerText;
+		  document.getElementById("approvalInfo").value = vacationInfoStr;
+		  
+	  }
+	  else if(btnId=="overtime-btn") {
+		  alert("youtouchedovertimeId");
+	  }
+	  else if(btnId=="woc-btn") {
+		  alert("youtouchedwocId");
+	  }
+	  
+	  if(document.getElementById("approvalInfo").value!=null) {
+		  alert(document.getElementById("approvalInfo").value);
+		  submitToCtrl();
+	  }
+	  else {
+		  alert("널!!");
+	  }
+	  
+	  // Ajax 요청 보내기
+	  function submitToCtrl(){
+		  $.ajax({
+		    url: 'approvalwrite.do',
+		    type: 'POST',
+		    data: $('#vacationForm').serialize(),
+		    success: function(response) {
+		        console.log(formData);
+		        asyncMovePage('approval.do');
+		    },
+		    error: function(xhr, status, error) {
+		        // 에러 처리
+		    }
+		  });
+	  }
+}
+
+</script>
 <style>
 /* .approval-write-form-accordion-body{
 	height:80%;

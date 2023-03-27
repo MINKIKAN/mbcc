@@ -30,10 +30,9 @@
 			<hr>
 			<div class="task-main-side-body">
 				<div class="task-main-side-header-content task-main-side-header-content-sort-entire" style="width:100%;" onclick="sideHeaderContentClickEntire()">전체 업무</div>
-				<div class="task-main-side-header-content task-main-side-header-content-sort-responsiblememnum" style="width:100%;" onclick="sideHeaderContentClickResponsibleMemNum()">담당 업무</div>
+				<div class="task-main-side-header-content task-main-side-header-content-sort-responsiblememnum" style="width:100%;" onclick="sideHeaderContentClickResponsibleMemNum('${matchedMemNum}')">담당 업무</div>
 				<div class="task-main-side-header-content-sort-teamnum" style="width:100%;" onclick="">참조 업무</div>
-				<div class="task-main-side-header-content-sort-memnum" style="width:100%;" onclick="sideHeaderContentClickMemNum()">내가 쓴 업무</div>
-				<div class="task-main-side-header-content" style="width:100%;" onclick="">임시 보관함</div>
+				<div class="task-main-side-header-content-sort-memnum" style="width:100%;" onclick="sideHeaderContentClickMemNum('${matchedMemNum}')">내가 쓴 업무</div>
 			</div>
 			<hr>
 		</div>
@@ -104,23 +103,22 @@
 	          <form id="taskForm">
 	            <div class="form-group mb-3">
 	              <label for="taskTitle" class="form-label">제목</label>
-	              <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요">
+	              <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요" required>
 	            </div>
 	            <div class="form-group mb-3">
 	              <label for="responsibleMemNum" class="form-label">담당자 회원 번호</label>
 	              <!-- <input type="number" class="form-control" id="responsibleMemNum" name="responsibleMemNum" placeholder="담당자 회원 번호를 입력하세요"> -->
-	              <input type="text" class="form-control" id="responsibleMemNum" name="responsibleMemNum" placeholder="담당자 이름을 입력하세요">
+	              <input type="text" class="form-control" id="responsibleMemNum" name="responsibleMemNum" placeholder="담당자 이름을 입력하세요" required>
 	            </div>
 	            <div class="form-group mb-3">
 	              <label for="teamNum" class="form-label">부서 번호</label>
-	              <input type="number" class="form-control" id="teamNum" name="teamNum" placeholder="부서 번호를 입력하세요">
+	              <input type="number" class="form-control" id="teamNum" name="teamNum" placeholder="부서 번호를 입력하세요" required>
 	            </div>
 	            <div class="form-group mb-3">
 	              <label for="taskContent" class="form-label">내용</label>
-	              <textarea class="form-control" id="boardContent" name="boardContent" rows="3"></textarea>
+	              <textarea class="form-control" id="boardContent" name="boardContent" rows="3" required></textarea>
 	            </div>
 	            <input type="hidden" id="boardType" name="boardType" value="TASK">
-	            
 				<input type="hidden" id="memNum" name="memNum" value="${matchedMemNum}">
 	            <input type="hidden" id="fileId" name="fileId" value="1">
 	            <input type="hidden" id="progress" name="progress" value="TO_DO">
