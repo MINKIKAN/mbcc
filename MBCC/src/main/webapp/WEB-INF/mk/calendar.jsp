@@ -78,7 +78,7 @@
 					// 이벤트를 데이터베이스에서 삭제합니다.
 
 					$.ajax({
-						url : '${ctx}/del.do',
+						url : '${ctx}/delCalendar.do',
 						data : {
 							"no" : info.event.id
 						},
@@ -91,7 +91,7 @@
 				editable : true, // false로 변경 시 draggable 작동 x 
 				displayEventTime : true,
 				locale : 'ko',
-				eventColor: 'gray',
+				eventColor: 'red',
 				events : function(info, successCallback, failureCallback) {
 					$.ajax({
 						url : '${ctx}/ajax.do',

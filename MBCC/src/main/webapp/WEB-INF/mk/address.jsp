@@ -10,6 +10,12 @@
 	        <c:set var="matchedMemNum" value="${member.memNum}" />
 	    </c:if>
 	</c:forEach>
+	<c:set var="matchedMemRole" value="" />
+	<c:forEach items="${list}" var="member">
+	    <c:if test="${member.memId == sessionScope.id}">
+	        <c:set var="matchedMemRole" value="${member.role}" />
+	    </c:if>
+	</c:forEach>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +35,7 @@
 <body>
 <input type="text" id="memNum" name="memNum" value="${matchedMemNum}">
 	<h1> 사원 목록 </h1>
+	
 	<table class="table table-striped table-hover">
 	
 			<tr>
@@ -66,7 +73,9 @@
 			</c:forEach>
 	</table>
 	
-	
+	<c:if test="${matchedMemRole == 'ADMIN'}">
+<button id="delMem-Btn" type="button" data-toggle="modal" data-target="#delMemModal" style="width:8%">멤버 삭제</button>
+</c:if>
 	
 	<div id="pop_resume" class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
 		<a href="#none" class="close_btn">X</a>
@@ -82,6 +91,51 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="delMemModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-lg" role="document">
+	      <div class="modal-content">
+	        <div class="modal-body">
+	          <!-- 업무 작성 양식 -->
+	          <form id="delMemForm">
+	            <div class="form-group mb-3">
+	              <label for="NoticeTitle" class="form-label">삭제할 사원 번호 입력</label>
+	              <input type="text" class="form-control" id="memDelNum" name="memDelNum" >
+	            </div>
+	            <div class="form-group mb-3">
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" onclick="deleteMemberForm(form)">등록</button>
+		      </div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<script>
 	
+	
+	$(document).ready(function() {
+	    $('#delMem-Btn').on('click', function() {
+		
+	        $('#delMemModal').modal('show');
+		
+	    });
+	});
+	
+	function deleteMemberForm(form) {
+		  $.ajax({
+		    url: '${ctx}/deleteMember.do',
+		    type: 'POST',
+		    data: $('#delMemForm').serialize(),
+		    success: function(response) {
+		      asyncMovePage('Address.do');
+		      $('#delMemModal').modal('hide');
+		    },
+		    error: function(xhr, status, error) {
+		      // 에러 처리
+		    }
+		  });
+		}
+	
+	</script>
 </body>
 </html>
